@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ソシアル製薬 商品情報サイト</title>
+  <meta name="description" content="ソシアル製薬の製品情報サイトです。カテゴリーやお悩み、製品名から製品を探せます。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body id="top">
+
+  <!-- ===== ヘッダー ===== -->
+  <header class="header">
+    <div class="header__inner container">
+      <a href="index.html" class="header__brand">
+        <img src="images/logo.svg" alt="ソシアル製薬" class="header__logo">
+        <span class="header__sub">商品情報サイト</span>
+      </a>
+
+      <form class="search search--header" action="#" role="search">
+        <input type="search" placeholder="製品名やキーワードを検索" aria-label="サイト内検索">
+        <button type="submit" aria-label="検索">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        </button>
+      </form>
+
+      <!-- スマホ用メニューボタン（チェックボックスで開閉） -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-toggle__btn" aria-label="メニューを開く"><span></span></label>
+    </div>
+
+    <!-- ===== グローバルナビ ===== -->
+    <nav class="gnav" aria-label="メインメニュー">
+      <ul class="gnav__list container">
+        <li><a href="#products">製品カタログ</a></li>
+        <li><a href="#">よくあるご質問</a></li>
+        <li><a href="#">健康お役立ち情報</a></li>
+        <li><a href="#">公式オンラインショップ</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== メインビジュアル（スライダー） ===== -->
+    <section class="hero" aria-label="おすすめ情報">
+      <div class="hero__track">
+        <div class="hero__slide is-active">
+          <div class="hero__img hero__img--1">
+            <p class="hero__copy">毎日の「ちょっと不調」に、<br>やさしく寄りそう。</p>
+          </div>
+        </div>
+        <div class="hero__slide">
+          <div class="hero__img hero__img--2">
+            <p class="hero__copy">新発売<br>ソシアル鼻炎カプセルEX</p>
+          </div>
+        </div>
+        <div class="hero__slide">
+          <div class="hero__img hero__img--3">
+            <p class="hero__copy">季節の変わり目の<br>体調管理ガイド</p>
+          </div>
+        </div>
+        <div class="hero__slide">
+          <div class="hero__img hero__img--4">
+            <p class="hero__copy">公式オンラインショップ<br>オープン</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="hero__arrow hero__arrow--prev" aria-label="前のスライド"></button>
+      <button class="hero__arrow hero__arrow--next" aria-label="次のスライド"></button>
+
+      <div class="hero__dots" role="tablist">
+        <button class="is-active" aria-label="スライド1"></button>
+        <button aria-label="スライド2"></button>
+        <button aria-label="スライド3"></button>
+        <button aria-label="スライド4"></button>
+      </div>
+    </section>
+
+    <!-- ===== 製品を探す ===== -->
+    <section class="find" id="products">
+      <div class="find__head">
+        <span class="find__icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        </span>
+        <h2 class="section-title">製品を探す</h2>
+      </div>
+
+      <!-- タブ（ラジオボタンで切り替え・JS不要） -->
+      <div class="tabs">
+        <input type="radio" name="find-tab" id="tab-category" checked>
+        <input type="radio" name="find-tab" id="tab-name">
+
+        <div class="tabs__labels">
+          <label for="tab-category">カテゴリー・悩みから探す</label>
+          <label for="tab-name">製品名から探す</label>
+        </div>
+
+        <div class="tabs__body">
+          <form class="keyword container" action="#" role="search">
+            <label for="keyword" class="keyword__label">キーワードで検索</label>
+            <div class="search search--pill">
+              <input type="search" id="keyword" placeholder="製品名やキーワードを検索">
+              <button type="submit" aria-label="検索">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+              </button>
+            </div>
+          </form>
+
+          <ul class="chips chips--category container">
+            <li><a href="#">かぜ・発熱</a></li>
+            <li><a href="#">頭痛・痛み</a></li>
+            <li><a href="#">胃腸</a></li>
+            <li><a href="#">鼻炎・アレルギー</a></li>
+            <li><a href="#">目の疲れ</a></li>
+            <li><a href="#">肌トラブル</a></li>
+            <li><a href="#">疲労・滋養</a></li>
+            <li><a href="#">睡眠</a></li>
+          </ul>
+
+          <ul class="chips chips--name container">
+            <li><a href="#">あ行</a></li>
+            <li><a href="#">か行</a></li>
+            <li><a href="#">さ行</a></li>
+            <li><a href="#">た行</a></li>
+            <li><a href="#">な行</a></li>
+            <li><a href="#">は行</a></li>
+            <li><a href="#">ま行</a></li>
+            <li><a href="#">や・ら・わ行</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 製品一覧 -->
+      <div class="products">
+        <ul class="products__grid container">
+          <li class="card">
+            <div class="card__img">製品画像</div>
+            <div class="card__body">
+              <span class="card__tag">かぜ・発熱</span>
+              <h3 class="card__name">ソシアルかぜ顆粒</h3>
+              <p class="card__text">のどの痛み・発熱など、かぜの諸症状に。</p>
+              <a href="#" class="btn-more">くわしく見る</a>
+            </div>
+          </li>
+          <li class="card">
+            <div class="card__img">製品画像</div>
+            <div class="card__body">
+              <span class="card__tag">頭痛・痛み</span>
+              <h3 class="card__name">ソシアルペインS</h3>
+              <p class="card__text">つらい頭痛・生理痛にすばやく効く。</p>
+              <a href="#" class="btn-more">くわしく見る</a>
+            </div>
+          </li>
+          <li class="card">
+            <div class="card__img">製品画像</div>
+            <div class="card__body">
+              <span class="card__tag">胃腸</span>
+              <h3 class="card__name">ソシアル胃腸錠</h3>
+              <p class="card__text">胃もたれ・胸やけをすっきりケア。</p>
+              <a href="#" class="btn-more">くわしく見る</a>
+            </div>
+          </li>
+          <li class="card">
+            <div class="card__img">製品画像</div>
+            <div class="card__body">
+              <span class="card__tag">鼻炎・アレルギー</span>
+              <h3 class="card__name">ソシアル鼻炎カプセルEX</h3>
+              <p class="card__text">くしゃみ・鼻水を1日1回でおさえる。</p>
+              <a href="#" class="btn-more">くわしく見る</a>
+            </div>
+          </li>
+          <li class="card">
+            <div class="card__img">製品画像</div>
+            <div class="card__body">
+              <span class="card__tag">目の疲れ</span>
+              <h3 class="card__name">ソシアルアイクール</h3>
+              <p class="card__text">パソコン・スマホで疲れた目に。</p>
+              <a href="#" class="btn-more">くわしく見る</a>
+            </div>
+          </li>
+          <li class="card">
+            <div class="card__img">製品画像</div>
+            <div class="card__body">
+              <span class="card__tag">肌トラブル</span>
+              <h3 class="card__name">ソシアルスキンバーム</h3>
+              <p class="card__text">かゆみ・肌荒れをやさしく保護。</p>
+              <a href="#" class="btn-more">くわしく見る</a>
+            </div>
+          </li>
+          <li class="card">
+            <div class="card__img">製品画像</div>
+            <div class="card__body">
+              <span class="card__tag">疲労・滋養</span>
+              <h3 class="card__name">ソシアルリカバリー液</h3>
+              <p class="card__text">肉体疲労時の栄養補給に。</p>
+              <a href="#" class="btn-more">くわしく見る</a>
+            </div>
+          </li>
+          <li class="card">
+            <div class="card__img">製品画像</div>
+            <div class="card__body">
+              <span class="card__tag">睡眠</span>
+              <h3 class="card__name">ソシアルナイトレスト</h3>
+              <p class="card__text">一時的な不眠の緩和に。</p>
+              <a href="#" class="btn-more">くわしく見る</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== お問い合わせ ===== -->
+    <section class="contact" id="contact">
+      <h2 class="section-title">製品に関するお問い合わせ</h2>
+      <div class="contact__btns container">
+        <a href="#" class="btn-wide">製品に関するお問い合わせフォーム</a>
+        <a href="#" class="btn-wide">よくあるお問い合わせ</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== フッター ===== -->
+  <footer class="footer">
+    <div class="footer__sitemap container">
+      <div class="footer__col">
+        <p class="footer__heading">製品情報</p>
+        <ul class="footer__links">
+          <li>
+            <a href="#">カテゴリー・悩みから探す</a>
+            <ul class="footer__sub">
+              <li><a href="#">かぜ・発熱</a></li>
+              <li><a href="#">頭痛・痛み</a></li>
+              <li><a href="#">胃腸</a></li>
+              <li><a href="#">鼻炎・アレルギー</a></li>
+              <li><a href="#">目の疲れ</a></li>
+              <li><a href="#">肌トラブル</a></li>
+              <li><a href="#">疲労・滋養</a></li>
+              <li><a href="#">睡眠</a></li>
+            </ul>
+          </li>
+          <li><a href="#">製品名から探す</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <ul class="footer__links">
+          <li><a href="#">お問い合わせ</a></li>
+          <li><a href="#">公式オンラインショップ</a></li>
+        </ul>
+        <form class="search search--footer" action="#" role="search">
+          <input type="search" placeholder="サイト内検索" aria-label="サイト内検索">
+          <button type="submit" aria-label="検索">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+          </button>
+        </form>
+        <a href="#" class="btn-shop" target="_blank" rel="noopener">
+          ソシアル製薬　公式オンラインショップ
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__bottom-inner container">
+        <a href="index.html" class="footer__brand">
+          <img src="images/logo.svg" alt="ソシアル製薬">
+          <span>商品情報サイト</span>
+        </a>
+        <ul class="footer__policy">
+          <li><a href="#">個人情報の取り扱いについて</a></li>
+          <li><a href="#">セキュリティポリシー</a></li>
+          <li><a href="#">ご利用上の注意</a></li>
+        </ul>
+        <a href="#top" class="pagetop" aria-label="ページの先頭へ"></a>
+      </div>
+      <p class="footer__copy"><small>&copy; 2026 Socialu Seiyaku. All Rights Reserved.</small></p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
