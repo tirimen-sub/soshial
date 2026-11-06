@@ -30,7 +30,7 @@
 展示用のレジ一式。サイト本体とは別フォルダで、ここは JS 中心（上の「JS は最小限」の方針の対象外）。
 
 - `index.html` + `register.js`: PCレジ。USB/Bluetooth のバーコードスキャナー（キーボードとして動く）で読む。入力欄に番号が入り Enter で明細に追加。お会計でレシート表示
-- `self.html` + `self.js` + `self.css`: スマホのセルフレジ。カメラで読み取り → 商品詳細 → カート → 購入 → レシート画像（保存・シェア・X投稿）。読み取りは html5-qrcode 2.3.8 を CDN から読む（unpkg、だめなら jsDelivr）
+- `self.html` + `self.js` + `self.css`: スマホのセルフレジ。カメラで読み取り → 商品ポップアップ（サムネ・商品名・価格・説明・カートに入れる。個数選択はなし、1回で1個。個数はカート画面で変える）→ カート → 購入 → レシート画像（保存・シェア・X投稿）。読み取りは html5-qrcode 2.3.8 を CDN から読む（unpkg、だめなら jsDelivr）
 - `admin.html` + `admin.js`: 商品の追加・編集・削除、products.js の書き出し・読み込み、売上（商品ごとの販売数ランキング・CSV）
 - `barcodes.html`: 印刷用のバーコード一覧
 - `products.js`: 商品の初期データ（仮の20種）。`common.js`: 共通処理（保存、EAN-13 のチェックデジットと SVG 描画）。`config.js`: GAS の URL など

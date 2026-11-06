@@ -9,7 +9,6 @@ let cart = [];          // { code, qty }
 let scanner = null;     // Html5Qrcode
 let scanning = false;
 let current = null;     // 詳細に出している商品
-let detailQty = 1;
 let lastRead = { code: '', at: 0 };
 let receiptBlob = null;
 
@@ -109,23 +108,17 @@ function handleCode(code) {
   openDetail(p);
 }
 
-// ---------- 商品詳細 ----------
+// ---------- 商品のポップアップ ----------
 function openDetail(p) {
   current = p;
-  detailQty = 1;
   pauseScanner();
   $('d-img').innerHTML = p.image ? `<img src="${escapeHTML(p.image)}" alt="">` : '製品画像';
   $('d-cat').textContent = p.category;
   $('d-name').textContent = p.name;
+  $('d-price').textContent = yen(p.price) + '（税込）';
   $('d-text').textContent = p.text || '';
-  renderDetail();
   $('detail').hidden = false;
-}
-
-function renderDetail() {
-  $('d-qty').textContent = detailQty;
-  $('d-price').textContent = yen(current.price * detailQty);
-  $('d-minus').disabled = detailQty <= 1;
+  $('d-add').focus();
 }
 
 function closeDetail() {
@@ -134,15 +127,14 @@ function closeDetail() {
   resumeScanner();
 }
 
-$('d-minus').addEventListener('click', () => { if (detailQty > 1) { detailQty--; renderDetail(); } });
-$('d-plus').addEventListener('click', () => { if (detailQty < 99) { detailQty++; renderDetail(); } });
 $('d-close').addEventListener('click', closeDetail);
 $('detail').addEventListener('click', e => { if (e.target.id === 'detail') closeDetail(); });
 
+// 1つずつカートに入れる（個数はカート画面で変えられる）
 $('d-add').addEventListener('click', () => {
   const line = cart.find(l => l.code === current.code);
-  if (line) line.qty += detailQty;
-  else cart.push({ code: current.code, qty: detailQty });
+  if (line) line.qty++;
+  else cart.push({ code: current.code, qty: 1 });
   closeDetail();
   updateCartBar('scan');
   const bar = $('cartbar');

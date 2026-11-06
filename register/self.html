@@ -39,19 +39,18 @@
     <p class="s-error" id="camera-error" hidden></p>
   </section>
 
-  <!-- 3. 商品詳細（読み取ると下から出てくる） -->
+  <!-- 3. 商品のポップアップ（読み取ると下から出てくる） -->
   <div class="sheet" id="detail" hidden>
-    <div class="sheet__body">
-      <div class="s-detail__img" id="d-img">製品画像</div>
-      <p class="s-detail__cat" id="d-cat"></p>
-      <h2 class="s-detail__name" id="d-name"></h2>
-      <p class="s-detail__text" id="d-text"></p>
-      <p class="s-detail__price" id="d-price"></p>
-      <div class="s-qty">
-        <button type="button" id="d-minus" aria-label="1つ減らす">−</button>
-        <span id="d-qty">1</span>
-        <button type="button" id="d-plus" aria-label="1つ増やす">＋</button>
+    <div class="sheet__body" role="dialog" aria-modal="true" aria-labelledby="d-name">
+      <div class="s-pop">
+        <div class="s-pop__img" id="d-img">製品画像</div>
+        <div class="s-pop__head">
+          <p class="s-detail__cat" id="d-cat"></p>
+          <h2 class="s-pop__name" id="d-name"></h2>
+          <p class="s-pop__price" id="d-price"></p>
+        </div>
       </div>
+      <p class="s-pop__text" id="d-text"></p>
       <button class="s-btn s-btn--main" type="button" id="d-add">カートに入れる</button>
       <button class="s-btn s-btn--ghost" type="button" id="d-close">やめる</button>
     </div>
