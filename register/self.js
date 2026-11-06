@@ -151,6 +151,8 @@ function openDetail(p) {
   text('d-storage', p.storage);
   section('sec-storage', !!p.storage);
 
+  // 開いた項目は、次の商品を出すときに閉じておく
+  document.querySelectorAll('.product__fold').forEach(d => { d.open = false; });
   $('detail').hidden = false;
   $('detail').scrollTop = 0;
   document.body.classList.add('is-locked');
