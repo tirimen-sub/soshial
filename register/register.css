@@ -1,0 +1,257 @@
+@charset "UTF-8";
+
+/* =========================================================
+   レジ・商品登録まわりのスタイル
+   色はサイト本体（css/style.css の :root）と合わせている
+   ========================================================= */
+:root {
+  --color-main: #e8743b;
+  --color-main-dark: #c95c26;
+  --color-accent: #fdf1e9;
+  --color-text: #333;
+  --color-text-light: #777;
+  --color-bg: #fff;
+  --color-bg-gray: #f4f2f0;
+  --color-border: #ddd;
+  --color-danger: #c0392b;
+  --radius: 10px;
+  --shadow: 0 2px 10px rgba(0, 0, 0, .08);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  color: var(--color-text);
+  background: var(--color-bg-gray);
+  line-height: 1.6;
+}
+
+h1, h2, p { margin: 0; }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+
+/* ---------- 上部バー ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 20px;
+  background: var(--color-bg);
+  border-bottom: 4px solid var(--color-main);
+}
+.topbar img { height: 34px; }
+.topbar__title { font-weight: 700; font-size: 1.1rem; }
+.topbar nav { margin-left: auto; display: flex; gap: 8px; }
+.topbar nav a {
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: .9rem;
+}
+.topbar nav a:hover { background: var(--color-accent); }
+.topbar nav a[aria-current="page"] { background: var(--color-main); color: #fff; }
+
+/* ---------- ボタン ---------- */
+.btn {
+  border: 0;
+  border-radius: var(--radius);
+  padding: 10px 18px;
+  background: var(--color-bg-gray);
+  color: var(--color-text);
+  font-weight: 700;
+}
+.btn:hover { filter: brightness(.95); }
+.btn--main { background: var(--color-main); color: #fff; }
+.btn--main:hover { background: var(--color-main-dark); filter: none; }
+.btn--danger { background: none; color: var(--color-danger); }
+.btn--small { padding: 4px 10px; font-size: .85rem; }
+.btn:disabled { opacity: .4; cursor: default; }
+
+/* =========================================================
+   レジ画面
+   ========================================================= */
+.pos {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 20px;
+  padding: 20px;
+  height: calc(100vh - 62px);
+}
+
+.panel {
+  background: var(--color-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* 読み取った直後の商品 */
+.pos__last {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--color-border);
+  min-height: 112px;
+}
+.pos__last-label { font-size: .85rem; color: var(--color-text-light); }
+.pos__last-name { font-size: 1.8rem; font-weight: 700; }
+.pos__last-price { font-size: 1.3rem; color: var(--color-main-dark); font-weight: 700; }
+.pos__last.is-flash { animation: flash .5s; }
+.pos__last.is-error .pos__last-name { color: var(--color-danger); }
+@keyframes flash { from { background: var(--color-accent); } to { background: transparent; } }
+
+/* 明細 */
+.lines { flex: 1; overflow-y: auto; margin: 0; padding: 0; list-style: none; }
+.line {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+.line__name { font-weight: 700; }
+.line__cat { font-size: .8rem; color: var(--color-text-light); }
+.line__qty { display: flex; align-items: center; gap: 6px; }
+.line__qty button {
+  width: 30px; height: 30px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-bg);
+}
+.line__sum { min-width: 90px; text-align: right; font-weight: 700; }
+.lines__empty { padding: 40px 24px; text-align: center; color: var(--color-text-light); }
+
+/* 右側：合計・入力 */
+.pos__side { padding: 24px; gap: 20px; }
+.scan-label { font-size: .85rem; color: var(--color-text-light); }
+.scan-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.2rem;
+  letter-spacing: .1em;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius);
+}
+.scan-input:focus { outline: none; border-color: var(--color-main); }
+.scan-hint { font-size: .8rem; color: var(--color-text-light); margin-top: 4px; }
+
+.total { margin-top: auto; border-top: 2px solid var(--color-text); padding-top: 16px; }
+.total__row { display: flex; justify-content: space-between; }
+.total__row--big { font-size: 2.4rem; font-weight: 700; }
+.total__count { color: var(--color-text-light); }
+
+.pos__actions { display: grid; grid-template-columns: 1fr 2fr; gap: 10px; }
+.pos__actions .btn { padding: 16px; font-size: 1.1rem; }
+
+/* お会計（レシート） */
+.modal {
+  border: 0;
+  border-radius: var(--radius);
+  padding: 0;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, .3);
+}
+.modal::backdrop { background: rgba(0, 0, 0, .4); }
+
+.receipt {
+  width: 320px;
+  padding: 28px 24px;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", monospace;
+  font-size: .9rem;
+}
+.receipt img { display: block; width: 140px; margin: 0 auto 8px; }
+.receipt__head { text-align: center; margin-bottom: 12px; color: var(--color-text-light); font-size: .8rem; }
+.receipt__row { display: flex; justify-content: space-between; gap: 8px; }
+.receipt__row--sub { padding-left: 1em; color: var(--color-text-light); font-size: .8rem; }
+.receipt hr { border: 0; border-top: 1px dashed var(--color-text-light); margin: 10px 0; }
+.receipt__total { font-size: 1.3rem; font-weight: 700; }
+.receipt__foot { text-align: center; margin-top: 16px; font-size: .8rem; color: var(--color-text-light); }
+.receipt__close { width: 100%; margin-top: 16px; }
+
+/* =========================================================
+   商品登録画面
+   ========================================================= */
+.admin {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  gap: 20px;
+}
+.admin .panel { padding: 24px; }
+.admin h2 { font-size: 1.1rem; margin-bottom: 16px; }
+
+.form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 20px; }
+.form label { display: grid; gap: 4px; font-size: .85rem; color: var(--color-text-light); }
+.form .is-wide { grid-column: 1 / -1; }
+.form input, .form textarea {
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-text);
+}
+.form input:focus, .form textarea:focus { outline: none; border-color: var(--color-main); }
+.form__code { display: flex; gap: 8px; }
+.form__code input { flex: 1; letter-spacing: .08em; }
+.form__actions { grid-column: 1 / -1; display: flex; gap: 10px; }
+.form__msg { font-size: .9rem; align-self: center; }
+.form__msg.is-error { color: var(--color-danger); }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+th, td { padding: 8px 10px; border-bottom: 1px solid var(--color-border); text-align: left; }
+th { font-size: .8rem; color: var(--color-text-light); font-weight: 400; }
+td.num { text-align: right; white-space: nowrap; }
+td.code { font-family: Consolas, monospace; white-space: nowrap; }
+tr.is-editing { background: var(--color-accent); }
+.cell-actions { white-space: nowrap; }
+
+.tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.tools p { font-size: .85rem; color: var(--color-text-light); width: 100%; }
+
+.sales-summary { display: flex; gap: 32px; margin-bottom: 12px; }
+.sales-summary b { font-size: 1.4rem; display: block; }
+
+/* =========================================================
+   バーコード一覧（印刷用）
+   ========================================================= */
+.sheet {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.label {
+  background: #fff;
+  border: 1px dashed var(--color-border);
+  padding: 10px;
+  text-align: center;
+  break-inside: avoid;
+}
+.label__name { font-size: .8rem; font-weight: 700; }
+.label__price { font-size: .8rem; }
+.barcode { width: 100%; max-width: 200px; height: auto; }
+.sheet-note { max-width: 1080px; margin: 0 auto; padding: 20px 20px 0; font-size: .9rem; }
+
+@media print {
+  .topbar, .sheet-note { display: none; }
+  body { background: #fff; }
+  .sheet { padding: 0; }
+}
+
+/* ---------- 画面が狭いとき ---------- */
+@media (max-width: 900px) {
+  .pos { grid-template-columns: 1fr; height: auto; }
+  .lines { min-height: 200px; }
+  .sheet { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 640px) {
+  .form { grid-template-columns: 1fr; }
+  .sheet { grid-template-columns: repeat(2, 1fr); }
+  .topbar__title { display: none; }
+}

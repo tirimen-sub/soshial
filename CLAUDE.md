@@ -25,6 +25,32 @@
 ページ構成は Figma のワイヤーフレームに沿っている。
 ヘッダー → グローバルナビ → スライダー → 製品を探す（タブ・キーワード検索・製品カード8枚）→ お問い合わせ → フッター
 
+## レジのインスタレーション（`register/`）
+
+展示用のレジ一式。サイト本体とは別フォルダで、ここは JS 中心（上の「JS は最小限」の方針の対象外）。
+
+- `index.html` + `register.js`: PCレジ。USB/Bluetooth のバーコードスキャナー（キーボードとして動く）で読む。入力欄に番号が入り Enter で明細に追加。お会計でレシート表示
+- `self.html` + `self.js` + `self.css`: スマホのセルフレジ。カメラで読み取り → 商品詳細 → カート → 購入 → レシート画像（保存・シェア・X投稿）。読み取りは html5-qrcode 2.3.8 を CDN から読む（unpkg、だめなら jsDelivr）
+- `admin.html` + `admin.js`: 商品の追加・編集・削除、products.js の書き出し・読み込み、売上（商品ごとの販売数ランキング・CSV）
+- `barcodes.html`: 印刷用のバーコード一覧
+- `products.js`: 商品の初期データ（仮の20種）。`common.js`: 共通処理（保存、EAN-13 のチェックデジットと SVG 描画）。`config.js`: GAS の URL など
+- `gas/`: 全端末の売上をスプレッドシートに集める GAS（`Code.gs`）と設定手順（`README.md`）
+
+決めたこと
+
+- PCレジは市販のスキャナーで PC 完結にする（スマホをスキャナーにする案は HTTPS・通信の手間で見送り）
+- バーコードは店舗内専用の「20」始まりの JAN（EAN-13）。`2000000` + 連番5桁 + チェックデジット
+- 目的は在庫管理ではなく「どの商品が何個買われたか」のデータを取ること
+- 商品データと売上は各ブラウザの localStorage に保存される。来場者のスマホに商品を反映するには、商品登録画面で書き出した products.js を `register/` に入れて push する
+- 全員分の売上を集めるには、GAS をデプロイして `config.js` の `SALES_ENDPOINT` に URL を入れる（未設定ならその端末の中だけ）
+
+レジまわりで残っていること
+
+- 商品は仮。本番の内容に置き換える（products.js か商品登録画面で）
+- GAS は未デプロイ（`SALES_ENDPOINT` は空）
+- 実機（iPhone / Android）でのカメラ読み取りと、市販スキャナーでの読み取りは未確認
+- 商品画像：products.js の各商品に `image: "パス"` を足すと、セルフレジの詳細に表示される（商品登録画面からはまだ設定できない）
+
 ## 複数の PC で作業するとき
 
 初めての PC では、`gh auth login` → `gh auth setup-git` → `git clone https://github.com/tirimen-sub/soshial.git` の順に実行する。

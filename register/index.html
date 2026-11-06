@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ソシアル製薬 レジ</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="register.css">
+</head>
+<body>
+  <header class="topbar">
+    <img src="../images/logo.svg" alt="ソシアル製薬">
+    <span class="topbar__title">レジ</span>
+    <nav>
+      <a href="index.html" aria-current="page">レジ</a>
+      <a href="admin.html">商品登録</a>
+      <a href="barcodes.html">バーコード一覧</a>
+    </nav>
+  </header>
+
+  <main class="pos">
+    <!-- 左：読み取った商品と明細 -->
+    <section class="panel">
+      <div class="pos__last" id="last">
+        <p class="pos__last-label">バーコードを読み取ってください</p>
+        <p class="pos__last-name">―</p>
+        <p class="pos__last-price"></p>
+      </div>
+      <ul class="lines" id="lines"></ul>
+    </section>
+
+    <!-- 右：入力・合計・会計 -->
+    <section class="panel pos__side">
+      <form id="scan-form" autocomplete="off">
+        <label class="scan-label" for="scan">バーコード番号</label>
+        <input class="scan-input" id="scan" inputmode="numeric" autofocus>
+        <p class="scan-hint">スキャナーで読み取るか、番号を入力して Enter</p>
+      </form>
+
+      <div class="total">
+        <div class="total__row total__count">
+          <span>点数</span><span id="count">0点</span>
+        </div>
+        <div class="total__row total__row--big">
+          <span>合計</span><span id="total">¥0</span>
+        </div>
+      </div>
+
+      <div class="pos__actions">
+        <button class="btn" id="clear" type="button">取消</button>
+        <button class="btn btn--main" id="pay" type="button" disabled>お会計</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- レシート -->
+  <dialog class="modal" id="receipt-dialog">
+    <div class="receipt" id="receipt"></div>
+  </dialog>
+
+  <script src="config.js"></script>
+  <script src="products.js"></script>
+  <script src="common.js"></script>
+  <script src="register.js"></script>
+</body>
+</html>

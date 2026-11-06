@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>ソシアル製薬 セルフレジ</title>
+  <meta name="theme-color" content="#e8743b">
+  <link rel="stylesheet" href="self.css">
+</head>
+<body>
+  <header class="s-head">
+    <img src="../images/logo.svg" alt="ソシアル製薬">
+    <span>セルフレジ</span>
+  </header>
+
+  <!-- 1. はじめの画面 -->
+  <section class="screen is-active" id="screen-start">
+    <div class="s-start">
+      <h1>スマホでお買い物</h1>
+      <p>商品についているバーコードを、カメラで読み取ってください。</p>
+      <button class="s-btn s-btn--main" type="button" id="start">カメラを起動する</button>
+      <p class="s-note">これは展示作品です。商品・会社はすべて架空で、実際のお支払いは発生しません。</p>
+    </div>
+  </section>
+
+  <!-- 2. 読み取り画面 -->
+  <section class="screen" id="screen-scan">
+    <div class="s-camera">
+      <div id="reader"></div>
+      <div class="s-camera__frame" aria-hidden="true"></div>
+      <p class="s-camera__hint">バーコードを枠の中に</p>
+    </div>
+    <form class="s-manual" id="manual" autocomplete="off">
+      <input id="manual-code" inputmode="numeric" placeholder="読めないときは番号を入力">
+      <button class="s-btn" type="submit">確定</button>
+    </form>
+    <p class="s-error" id="camera-error" hidden></p>
+  </section>
+
+  <!-- 3. 商品詳細（読み取ると下から出てくる） -->
+  <div class="sheet" id="detail" hidden>
+    <div class="sheet__body">
+      <div class="s-detail__img" id="d-img">製品画像</div>
+      <p class="s-detail__cat" id="d-cat"></p>
+      <h2 class="s-detail__name" id="d-name"></h2>
+      <p class="s-detail__text" id="d-text"></p>
+      <p class="s-detail__price" id="d-price"></p>
+      <div class="s-qty">
+        <button type="button" id="d-minus" aria-label="1つ減らす">−</button>
+        <span id="d-qty">1</span>
+        <button type="button" id="d-plus" aria-label="1つ増やす">＋</button>
+      </div>
+      <button class="s-btn s-btn--main" type="button" id="d-add">カートに入れる</button>
+      <button class="s-btn s-btn--ghost" type="button" id="d-close">やめる</button>
+    </div>
+  </div>
+
+  <!-- 4. カート -->
+  <section class="screen" id="screen-cart">
+    <h2 class="s-title">カート</h2>
+    <ul class="s-cart" id="cart-list"></ul>
+    <div class="s-cart__total">
+      <span>合計（<span id="cart-count">0</span>点）</span>
+      <b id="cart-total">¥0</b>
+    </div>
+    <button class="s-btn s-btn--main" type="button" id="buy">購入する</button>
+    <button class="s-btn s-btn--ghost" type="button" id="back-scan">買い物を続ける</button>
+  </section>
+
+  <!-- 5. レシート -->
+  <section class="screen" id="screen-receipt">
+    <h2 class="s-title">お買い上げありがとうございました</h2>
+    <img class="s-receipt" id="receipt-img" alt="レシート">
+    <button class="s-btn s-btn--main" type="button" id="share">レシートを保存・シェア</button>
+    <a class="s-btn s-btn--x" id="post-x" target="_blank" rel="noopener">X（Twitter）に投稿</a>
+    <p class="s-note">画像つきで投稿するときは、「保存・シェア」から X を選んでください。</p>
+    <button class="s-btn s-btn--ghost" type="button" id="again">もう一度お買い物する</button>
+  </section>
+
+  <!-- 画面下のカートボタン -->
+  <button class="s-cartbar" type="button" id="cartbar" hidden>
+    <span>カート <b id="bar-count">0</b>点</span>
+    <span id="bar-total">¥0</span>
+    <span class="s-cartbar__go">見る ›</span>
+  </button>
+
+  <!-- カメラの読み取り部品。unpkg が使えないときは jsDelivr から読み込む -->
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+  <script>
+    if (typeof Html5Qrcode === 'undefined') {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"><\/script>');
+    }
+  </script>
+  <script src="config.js"></script>
+  <script src="products.js"></script>
+  <script src="common.js"></script>
+  <script src="self.js"></script>
+</body>
+</html>

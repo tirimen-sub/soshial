@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ソシアル製薬 商品登録</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="register.css">
+</head>
+<body>
+  <header class="topbar">
+    <img src="../images/logo.svg" alt="ソシアル製薬">
+    <span class="topbar__title">商品登録</span>
+    <nav>
+      <a href="index.html">レジ</a>
+      <a href="admin.html" aria-current="page">商品登録</a>
+      <a href="barcodes.html">バーコード一覧</a>
+    </nav>
+  </header>
+
+  <main class="admin">
+    <!-- 登録・編集フォーム -->
+    <section class="panel">
+      <h2 id="form-title">商品を追加</h2>
+      <form class="form" id="form" autocomplete="off">
+        <label class="is-wide">バーコード番号（13桁）
+          <span class="form__code">
+            <input id="f-code" inputmode="numeric" maxlength="13" required>
+            <button class="btn btn--small" type="button" id="new-code">番号を自動で作る</button>
+          </span>
+        </label>
+        <label>商品名
+          <input id="f-name" required>
+        </label>
+        <label>カテゴリー
+          <input id="f-category" list="category-list" required>
+          <datalist id="category-list"></datalist>
+        </label>
+        <label>価格（税込・円）
+          <input id="f-price" type="number" min="0" step="1" required>
+        </label>
+        <label class="is-wide">説明文
+          <textarea id="f-text" rows="2"></textarea>
+        </label>
+        <div class="form__actions">
+          <button class="btn btn--main" type="submit" id="submit">追加する</button>
+          <button class="btn" type="button" id="cancel" hidden>編集をやめる</button>
+          <p class="form__msg" id="msg"></p>
+        </div>
+      </form>
+    </section>
+
+    <!-- 商品一覧 -->
+    <section class="panel">
+      <h2>登録されている商品（<span id="product-count">0</span>件）</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>バーコード番号</th><th>商品名</th><th>カテゴリー</th><th>価格</th><th></th></tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- データの保存・読み込み -->
+    <section class="panel">
+      <h2>データの保存・読み込み</h2>
+      <div class="tools">
+        <p>商品はこのブラウザに保存されます。別のPCやブラウザで使うときは「書き出し」たファイルを「読み込み」してください。書き出した products.js を register フォルダのものと入れ替えると、初期データになります。</p>
+        <button class="btn" type="button" id="export">書き出し（products.js）</button>
+        <label class="btn" for="import">読み込み</label>
+        <input type="file" id="import" accept=".js,.json" hidden>
+        <button class="btn btn--danger" type="button" id="reset">初期データに戻す</button>
+      </div>
+    </section>
+
+    <!-- 売上 -->
+    <section class="panel">
+      <h2>この端末の売上</h2>
+      <div class="sales-summary">
+        <div>会計数<b id="sales-count">0</b></div>
+        <div>売上合計<b id="sales-total">¥0</b></div>
+        <div>販売点数<b id="sales-items">0</b></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>順位</th><th>商品名</th><th>カテゴリー</th><th>販売数</th><th>売上</th></tr>
+          </thead>
+          <tbody id="ranking"></tbody>
+        </table>
+      </div>
+      <div class="tools" style="margin-top:16px">
+        <button class="btn" type="button" id="sales-csv">CSVで書き出し</button>
+        <button class="btn btn--danger" type="button" id="sales-clear">記録を消す</button>
+      </div>
+    </section>
+
+    <!-- 全体の集計（GAS を設定したときだけ表示） -->
+    <section class="panel" id="remote" hidden>
+      <h2>全体の集計（スプレッドシート）</h2>
+      <p class="tools"><span style="font-size:.85rem;color:var(--color-text-light)">セルフレジを含め、すべての端末で買われた分です。</span></p>
+      <div class="sales-summary">
+        <div>会計数<b id="remote-count">-</b></div>
+        <div>売上合計<b id="remote-total">-</b></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>順位</th><th>商品名</th><th>販売数</th><th>売上</th></tr></thead>
+          <tbody id="remote-ranking"></tbody>
+        </table>
+      </div>
+      <div class="tools" style="margin-top:16px">
+        <button class="btn btn--main" type="button" id="remote-load">全体の集計を読み込む</button>
+        <span id="remote-msg" style="font-size:.85rem"></span>
+      </div>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="products.js"></script>
+  <script src="common.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

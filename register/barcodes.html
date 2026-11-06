@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ソシアル製薬 バーコード一覧</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="register.css">
+</head>
+<body>
+  <header class="topbar">
+    <img src="../images/logo.svg" alt="ソシアル製薬">
+    <span class="topbar__title">バーコード一覧</span>
+    <nav>
+      <a href="index.html">レジ</a>
+      <a href="admin.html">商品登録</a>
+      <a href="barcodes.html" aria-current="page">バーコード一覧</a>
+    </nav>
+  </header>
+
+  <p class="sheet-note">
+    印刷して切り取り、パッケージや値札に貼って使います（印刷するとこの説明とメニューは消えます）。
+    小さく印刷すると読み取りにくくなるので、幅3cm以上がおすすめです。
+    <button class="btn btn--small" type="button" onclick="print()">印刷する</button>
+  </p>
+
+  <main class="sheet" id="sheet"></main>
+
+  <script src="config.js"></script>
+  <script src="products.js"></script>
+  <script src="common.js"></script>
+  <script>
+    document.getElementById('sheet').innerHTML = getProducts().map(p => `
+      <div class="label">
+        <p class="label__name">${escapeHTML(p.name)}</p>
+        ${barcodeSVG(p.code)}
+        <p class="label__price">${yen(p.price)}（税込）</p>
+      </div>`).join('');
+  </script>
+</body>
+</html>
