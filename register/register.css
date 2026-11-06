@@ -157,19 +157,48 @@ button { cursor: pointer; }
 .modal::backdrop { background: rgba(0, 0, 0, .4); }
 
 .receipt {
-  width: 320px;
-  padding: 28px 24px;
-  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", monospace;
-  font-size: .9rem;
+  width: 340px;
+  padding: 22px 22px 24px;
+  background: #fffdf9;
+  color: #2b2b2b;
+  font-family: "BIZ UDGothic", "Hiragino Kaku Gothic ProN", "Yu Gothic", monospace;
+  font-size: 13px;
+  line-height: 1.55;
+  border-top: 8px solid transparent;
+  border-image: repeating-linear-gradient(135deg, #e8743b 0 6px, #fffdf9 6px 12px) 8;
 }
-.receipt img { display: block; width: 140px; margin: 0 auto 8px; }
-.receipt__head { text-align: center; margin-bottom: 12px; color: var(--color-text-light); font-size: .8rem; }
+.receipt p { margin: 0; }
+.receipt__logo { display: block; width: 200px; margin: 4px auto 12px; }
 .receipt__row { display: flex; justify-content: space-between; gap: 8px; }
-.receipt__row--sub { padding-left: 1em; color: var(--color-text-light); font-size: .8rem; }
-.receipt hr { border: 0; border-top: 1px dashed var(--color-text-light); margin: 10px 0; }
-.receipt__total { font-size: 1.3rem; font-weight: 700; }
-.receipt__foot { text-align: center; margin-top: 16px; font-size: .8rem; color: var(--color-text-light); }
-.receipt__close { width: 100%; margin-top: 16px; }
+.receipt__row--sub { padding-left: 2em; color: #6b6b6b; }
+.receipt__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0 10px !important;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: .5em;
+  color: #b5501c;
+}
+.receipt__title::before, .receipt__title::after { content: ""; flex: 1; border-top: 1px solid var(--color-main); }
+.receipt hr { border: 0; border-top: 1px dashed #8a8a8a; margin: 10px 0 6px; }
+.receipt__total { font-size: 26px; font-weight: 700; line-height: 1.3; color: #b5501c; align-items: baseline; }
+.receipt__total span:first-child { letter-spacing: .3em; }
+.receipt__pay { margin-top: 6px; }
+.receipt__memo {
+  margin-top: 18px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-main);
+  border-radius: 4px;
+  font-size: 12px;
+}
+.receipt__memo b { color: #b5501c; font-size: 13px; }
+.receipt__bars { display: flex; justify-content: center; height: 44px; margin: 18px 0 4px; }
+.receipt__bars span { display: block; height: 100%; }
+.receipt__no { text-align: center; font-size: 12px; letter-spacing: .1em; }
+.receipt__foot { text-align: center; margin-top: 14px !important; font-size: 11px; color: #6b6b6b; }
+.receipt__close { width: 100%; margin-top: 16px; font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; }
 
 /* =========================================================
    商品登録画面

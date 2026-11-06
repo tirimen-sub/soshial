@@ -146,3 +146,49 @@ function barcodeSVG(code) {
   return `<svg class="barcode" viewBox="0 0 ${width} 78" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="バーコード ${code}">` +
     `<rect width="${width}" height="78" fill="#fff"/><g fill="#000">${rects}${text}</g></svg>`;
 }
+
+// ---------- レシート ----------
+// 部門コード：カテゴリーごとに 101, 102 … を割り振る（商品データに並んだ順）
+function deptCode(category, products) {
+  const cats = [];
+  products.forEach(p => { if (!cats.includes(p.category)) cats.push(p.category); });
+  const i = cats.indexOf(category);
+  return String(101 + (i < 0 ? cats.length : i));
+}
+
+// レシート番号：店No-レジNo-日付-その日のこの端末での通し番号
+function makeReceiptNo(regNo, date) {
+  const R = window.RECEIPT || {};
+  const ymd = date.getFullYear() + String(date.getMonth() + 1).padStart(2, '0') + String(date.getDate()).padStart(2, '0');
+  const today = date.toDateString();
+  const count = getSales().filter(s => new Date(s.date).toDateString() === today).length + 1;
+  return [R.storeNo || '0001', regNo, ymd, String(count).padStart(4, '0')].join('-');
+}
+
+// 「2026年11月06日(金)」「18時07分」
+function receiptDate(date) {
+  const w = '日月火水木金土'[date.getDay()];
+  const p = n => String(n).padStart(2, '0');
+  return {
+    day: `${date.getFullYear()}年${p(date.getMonth() + 1)}月${p(date.getDate())}日(${w})`,
+    time: `${p(date.getHours())}時${p(date.getMinutes())}分`,
+  };
+}
+
+// 税込合計に含まれる消費税（10%）
+function innerTax(total) {
+  return Math.floor(total * 10 / 110);
+}
+
+// 飾りのバーコード（レシート番号から模様を作る。読み取りはできない）
+function receiptBars(no) {
+  const bars = [];
+  let seed = 0;
+  for (const c of no) seed = (seed * 31 + c.charCodeAt(0)) >>> 0;
+  for (let i = 0; i < 46; i++) {
+    seed = (seed * 1103515245 + 12345) >>> 0;
+    bars.push(1 + (seed >>> 16) % 3);       // 線の太さ
+    bars.push(1 + (seed >>> 20) % 3);       // すき間
+  }
+  return bars;
+}

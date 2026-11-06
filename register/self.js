@@ -209,18 +209,20 @@ $('start').addEventListener('click', () => {
 
 // ---------- 購入 ----------
 $('buy').addEventListener('click', async () => {
+  const btn = $('buy');
+  btn.disabled = true;
   const { count, total } = totals();
   const now = new Date();
-  const no = 'S' + now.toISOString().slice(2, 10).replace(/-/g, '') + '-' +
-    String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+  const R = window.RECEIPT || {};
+  const no = makeReceiptNo(R.selfNo || '0003', now); // 記録する前に番号を決める
   const items = cart.map(l => {
     const p = byCode.get(l.code);
-    return { code: p.code, name: p.name, price: p.price, qty: l.qty };
+    return { code: p.code, name: p.name, category: p.category, price: p.price, qty: l.qty };
   });
 
   addSale({ no, date: now.toISOString(), items, total, source: 'セルフレジ' });
 
-  const canvas = drawReceipt({ no, now, items, count, total });
+  const canvas = await drawReceipt({ no, now, items, count, total });
   $('receipt-img').src = canvas.toDataURL('image/png');
   receiptBlob = await new Promise(r => canvas.toBlob(r, 'image/png'));
 
@@ -229,112 +231,156 @@ $('buy').addEventListener('click', async () => {
   $('post-x').href = 'https://x.com/intent/tweet?' + params.toString();
 
   cart = [];
+  btn.disabled = false;
   show('receipt');
 });
 
 $('again').addEventListener('click', () => show('scan'));
 
-// ---------- レシート画像を描く ----------
-function drawReceipt({ no, now, items, count, total }) {
-  const W = 600;
-  const pad = 44;
-  const lineH = 36;
-  const rows = items.reduce((n, i) => n + (i.qty > 1 ? 2 : 1), 0);
-  const H = 470 + rows * lineH;
+// ---------- レシート画像を描く（PCレジのレシートと同じレイアウト） ----------
+const RECEIPT_FONT = '"BIZ UDGothic", "Hiragino Kaku Gothic ProN", "Yu Gothic", monospace';
+
+function loadImage(src) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => resolve(null);
+    img.src = src;
+  });
+}
+
+async function drawReceipt({ no, now, items, count, total }) {
+  const R = window.RECEIPT || {};
+  // 文字と画像がそろってから描く（そろわなくても代わりのもので描く）
+  try {
+    await Promise.race([
+      Promise.all([document.fonts.load(`13px ${RECEIPT_FONT}`), document.fonts.load(`bold 13px ${RECEIPT_FONT}`)]),
+      new Promise(r => setTimeout(r, 1500)),
+    ]);
+  } catch (e) {}
+  const logo = await loadImage('receipt-logo.png');
+
+  const W = 340, pad = 22, lh = 20;
+  const lines = items.reduce((n, i) => n + (i.qty > 1 ? 2 : 1), 0);
+  const H = 610 + lines * lh;
+  const scale = 3; // 高解像度で描く
 
   const c = document.createElement('canvas');
-  const scale = 2; // 高解像度で描く
   c.width = W * scale;
   c.height = H * scale;
   const g = c.getContext('2d');
   g.scale(scale, scale);
+  g.textBaseline = 'alphabetic';
 
-  const font = '"Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", sans-serif';
-  const main = '#e8743b';
-  const ink = '#333';
-  const light = '#888';
+  const ink = '#2b2b2b', light = '#6b6b6b', main = '#e8743b', dark = '#b5501c';
+  const font = (size, bold) => `${bold ? 'bold ' : ''}${size}px ${RECEIPT_FONT}`;
+  const row = (l, r, y, opt = {}) => {
+    g.fillStyle = opt.color || ink;
+    g.font = font(opt.size || 13, opt.bold);
+    g.textAlign = 'left';
+    g.fillText(opt.fitW ? fit(g, l, opt.fitW) : l, pad + (opt.indent || 0), y);
+    g.textAlign = 'right';
+    g.fillText(r, W - pad, y);
+  };
 
-  // 紙
+  // 紙と上のギザギザ
   g.fillStyle = '#fffdf9';
   g.fillRect(0, 0, W, H);
-  // 上下のギザギザ
-  g.fillStyle = '#e9e5e1';
-  for (let x = 0; x < W; x += 20) {
-    g.beginPath(); g.moveTo(x, 0); g.lineTo(x + 10, 10); g.lineTo(x + 20, 0); g.fill();
-    g.beginPath(); g.moveTo(x, H); g.lineTo(x + 10, H - 10); g.lineTo(x + 20, H); g.fill();
+  g.fillStyle = main;
+  for (let x = -8; x < W; x += 12) {
+    g.beginPath(); g.moveTo(x, 0); g.lineTo(x + 6, 0); g.lineTo(x + 14, 8); g.lineTo(x + 8, 8); g.fill();
   }
 
-  let y = 76;
-  g.textAlign = 'center';
-  g.fillStyle = main;
-  g.font = `bold 38px ${font}`;
-  g.fillText('ソシアル製薬', W / 2, y);
-  y += 30;
-  g.fillStyle = light;
-  g.font = `16px ${font}`;
-  g.fillText('SELF CHECKOUT', W / 2, y);
-  y += 36;
-  g.font = `17px ${font}`;
-  g.fillText(now.toLocaleString('ja-JP'), W / 2, y);
-  y += 24;
-  g.fillText('レシート No.' + no, W / 2, y);
+  // ロゴ
+  let y = 34;
+  if (logo) {
+    const lw = 200, lhgt = lw * logo.height / logo.width;
+    g.drawImage(logo, (W - lw) / 2, y, lw, lhgt);
+    y += lhgt + 26;
+  } else {
+    g.fillStyle = main; g.font = font(30, true); g.textAlign = 'center';
+    g.fillText('ソシアル製薬', W / 2, y + 30);
+    y += 60;
+  }
 
-  y += 26;
-  dashed(g, pad, W - pad, y, light);
-  y += 40;
+  // 店舗情報
+  const d = receiptDate(now);
+  g.fillStyle = ink; g.font = font(13); g.textAlign = 'left';
+  g.fillText(`${R.company || ''}　${R.store || ''}`, pad, y); y += lh;
+  g.fillText(`電話番号 ${R.tel || ''}`, pad, y); y += lh;
+  g.fillText('いつもお買い上げ有難うございます', pad, y); y += lh;
+  row('店No:' + (R.storeNo || ''), 'セルフレジNo:' + (R.selfNo || ''), y); y += lh;
+  row(d.day, d.time, y); y += 34;
 
-  g.font = `20px ${font}`;
+  // 領収証
+  g.fillStyle = dark; g.font = font(16, true); g.textAlign = 'center';
+  g.save();
+  if ('letterSpacing' in g) g.letterSpacing = '8px';
+  g.fillText('領収証', W / 2 + 4, y);
+  g.restore();
+  g.strokeStyle = main; g.lineWidth = 1;
+  g.beginPath(); g.moveTo(pad, y - 6); g.lineTo(W / 2 - 50, y - 6); g.moveTo(W / 2 + 50, y - 6); g.lineTo(W - pad, y - 6); g.stroke();
+  y += 28;
+
+  // 明細
   items.forEach(i => {
-    g.textAlign = 'left';
-    g.fillStyle = ink;
-    g.fillText(fit(g, i.name, W - pad * 2 - 130), pad, y);
-    g.textAlign = 'right';
-    g.fillText(yen(i.price * i.qty), W - pad, y);
-    y += lineH;
+    row(deptCode(i.category, products) + i.name, yen(i.price * i.qty), y, { fitW: W - pad * 2 - 80 });
+    y += lh;
     if (i.qty > 1) {
-      g.textAlign = 'left';
-      g.fillStyle = light;
-      g.font = `17px ${font}`;
-      g.fillText(`　${yen(i.price)} × ${i.qty}`, pad, y - 8);
-      g.font = `20px ${font}`;
-      y += lineH - 8;
+      row(`（${i.qty}コ×単${i.price.toLocaleString('ja-JP')}）`, '', y, { indent: 26, color: light });
+      y += lh;
     }
   });
 
-  dashed(g, pad, W - pad, y - 12, light);
-  y += 26;
+  dashed(g, pad, W - pad, y - 6, '#8a8a8a');
+  y += 14;
+  row(`小計　　${count}点`, yen(total), y); y += 32;
+  row('合計', yen(total), y, { size: 26, bold: true, color: dark }); y += 24;
+  row('（内、消費税等', yen(innerTax(total)) + '）', y); y += 26;
+  row(R.payment || '', yen(total), y); y += lh;
+  row('お釣り', '¥0', y); y += 22;
 
+  // お薬メモ
+  const boxH = 70;
+  g.strokeStyle = main; g.lineWidth = 1;
+  roundRect(g, pad, y, W - pad * 2, boxH, 4);
+  g.fillStyle = dark; g.font = font(13, true); g.textAlign = 'left';
+  g.fillText('お薬メモ', pad + 12, y + 22);
+  g.fillStyle = ink; g.font = font(12);
+  g.fillText('用法・用量を守って正しくお使いください。', pad + 12, y + 42);
+  g.fillText('症状が続くときは、医師・薬剤師にご相談ください。', pad + 12, y + 59);
+  y += boxH + 18;
+
+  // 飾りのバーコードとレシート番号
+  const bars = receiptBars(no);
+  const bw = bars.reduce((a, b) => a + b, 0);
+  let x = (W - bw) / 2;
   g.fillStyle = ink;
-  g.font = `20px ${font}`;
-  g.textAlign = 'left';  g.fillText('点数', pad, y);
-  g.textAlign = 'right'; g.fillText(count + '点', W - pad, y);
-  y += 46;
-  g.font = `bold 32px ${font}`;
-  g.textAlign = 'left';  g.fillText('合計', pad, y);
-  g.textAlign = 'right'; g.fillText(yen(total), W - pad, y);
-  y += 30;
-  g.fillStyle = light;
-  g.font = `17px ${font}`;
-  g.textAlign = 'left';  g.fillText('（内消費税 10%）', pad, y);
-  g.textAlign = 'right'; g.fillText(yen(Math.floor(total * 10 / 110)), W - pad, y);
-
-  y += 50;
-  g.textAlign = 'center';
-  g.fillStyle = main;
-  g.font = `bold 22px ${font}`;
-  g.fillText('お大事にどうぞ', W / 2, y);
-  y += 30;
-  g.fillStyle = light;
-  g.font = `15px ${font}`;
-  g.fillText('※ 架空の会社・商品による展示作品です', W / 2, y);
+  bars.forEach((w, i) => { if (i % 2 === 0) g.fillRect(x, y, w, 44); x += w; });
+  y += 60;
+  g.font = font(12); g.textAlign = 'center';
+  g.fillText(no, W / 2, y); y += 26;
+  g.fillStyle = light; g.font = font(11);
+  g.fillText('この作品の会社・商品はすべて架空です', W / 2, y);
 
   return c;
+}
+
+function roundRect(g, x, y, w, h, r) {
+  g.beginPath();
+  g.moveTo(x + r, y);
+  g.arcTo(x + w, y, x + w, y + h, r);
+  g.arcTo(x + w, y + h, x, y + h, r);
+  g.arcTo(x, y + h, x, y, r);
+  g.arcTo(x, y, x + w, y, r);
+  g.closePath();
+  g.stroke();
 }
 
 function dashed(g, x1, x2, y, color) {
   g.save();
   g.strokeStyle = color;
-  g.setLineDash([6, 6]);
+  g.setLineDash([4, 4]);
   g.beginPath(); g.moveTo(x1, y); g.lineTo(x2, y); g.stroke();
   g.restore();
 }

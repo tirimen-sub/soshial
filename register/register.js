@@ -118,34 +118,47 @@ clearBtn.addEventListener('click', () => {
 payBtn.addEventListener('click', () => {
   const { count, total } = totals();
   const now = new Date();
-  const no = String(getSales().length + 1).padStart(4, '0');
-
-  // 売上を記録する（商品登録画面で確認・CSV書き出しできる）
-  addSale({
-    no,
-    date: now.toISOString(),
-    items: cart.map(l => {
-      const p = byCode.get(l.code);
-      return { code: p.code, name: p.name, price: p.price, qty: l.qty };
-    }),
-    total,
-    source: 'レジ'
+  const R = window.RECEIPT || {};
+  const no = makeReceiptNo(R.posNo || '0001', now); // 記録する前に番号を決める
+  // 画面の明細は新しい順なので、レシートは読み取った順に並べ直す
+  const items = cart.slice().reverse().map(l => {
+    const p = byCode.get(l.code);
+    return { code: p.code, name: p.name, category: p.category, price: p.price, qty: l.qty };
   });
 
-  const tax = Math.floor(total * 10 / 110); // 税込金額に含まれる消費税（10%）
+  // 売上を記録する（商品登録画面で確認・CSV書き出しできる）
+  addSale({ no, date: now.toISOString(), items, total, source: 'レジ' });
+
+  const d = receiptDate(now);
+  const row = (l, r, cls = '') => `<div class="receipt__row ${cls}"><span>${l}</span><span>${r}</span></div>`;
   receiptEl.innerHTML = `
-    <img src="../images/logo.svg" alt="ソシアル製薬">
-    <p class="receipt__head">${now.toLocaleString('ja-JP')}<br>レシート No.${no}</p>
-    ${cart.map(l => {
-      const p = byCode.get(l.code);
-      return `<div class="receipt__row"><span>${escapeHTML(p.name)}</span><span>${yen(p.price * l.qty)}</span></div>` +
-        (l.qty > 1 ? `<div class="receipt__row receipt__row--sub"><span>${yen(p.price)} × ${l.qty}</span></div>` : '');
-    }).join('')}
+    <img class="receipt__logo" src="receipt-logo.png" alt="ソシアル製薬">
+    <div class="receipt__info">
+      <p>${escapeHTML(R.company || '')}　${escapeHTML(R.store || '')}</p>
+      <p>電話番号 ${escapeHTML(R.tel || '')}</p>
+      <p>いつもお買い上げ有難うございます</p>
+      ${row('店No:' + escapeHTML(R.storeNo || ''), 'レジNo:' + escapeHTML(R.posNo || ''))}
+      ${row(d.day, d.time)}
+    </div>
+    <p class="receipt__title"><span>領収証</span></p>
+    ${items.map(i =>
+      row(deptCode(i.category, products) + escapeHTML(i.name), yen(i.price * i.qty)) +
+      (i.qty > 1 ? row(`（${i.qty}コ×単${i.price.toLocaleString('ja-JP')}）`, '', 'receipt__row--sub') : '')
+    ).join('')}
     <hr>
-    <div class="receipt__row"><span>点数</span><span>${count}点</span></div>
-    <div class="receipt__row receipt__total"><span>合計</span><span>${yen(total)}</span></div>
-    <div class="receipt__row receipt__row--sub"><span>（内消費税 10%）</span><span>${yen(tax)}</span></div>
-    <p class="receipt__foot">お大事にどうぞ<br>ソシアル製薬</p>
+    ${row('小計　　' + count + '点', yen(total))}
+    ${row('合計', yen(total), 'receipt__total')}
+    ${row('（内、消費税等', yen(innerTax(total)) + '）')}
+    ${row(escapeHTML(R.payment || ''), yen(total), 'receipt__pay')}
+    ${row('お釣り', '¥0')}
+    <div class="receipt__memo">
+      <b>お薬メモ</b>
+      <p>用法・用量を守って正しくお使いください。症状が続くときは、医師・薬剤師にご相談ください。</p>
+    </div>
+    <div class="receipt__bars" aria-hidden="true">${receiptBars(no).map((w, i) =>
+      `<span style="width:${w}px;${i % 2 ? '' : 'background:#2b2b2b'}"></span>`).join('')}</div>
+    <p class="receipt__no">${no}</p>
+    <p class="receipt__foot">この作品の会社・商品はすべて架空です</p>
     <button class="btn btn--main receipt__close" type="button" id="receipt-close">閉じる</button>
   `;
   dialog.showModal();
