@@ -39,20 +39,63 @@
     <p class="s-error" id="camera-error" hidden></p>
   </section>
 
-  <!-- 3. 商品のポップアップ（読み取ると下から出てくる） -->
-  <div class="sheet" id="detail" hidden>
-    <div class="sheet__body" role="dialog" aria-modal="true" aria-labelledby="d-name">
-      <div class="s-pop">
-        <div class="s-pop__img" id="d-img">製品画像</div>
-        <div class="s-pop__head">
-          <p class="s-detail__cat" id="d-cat"></p>
-          <h2 class="s-pop__name" id="d-name"></h2>
-          <p class="s-pop__price" id="d-price"></p>
-        </div>
+  <!-- 3. 製品ページ（読み取ると画面いっぱいに出る。下のカメラは止めずに一時停止） -->
+  <div class="product" id="detail" hidden role="dialog" aria-modal="true" aria-labelledby="d-name">
+    <div class="product__bar">
+      <button class="product__back" type="button" id="d-close">‹ 読み取りにもどる</button>
+    </div>
+
+    <div class="product__hero" id="d-img"></div>
+
+    <div class="product__body">
+      <div class="product__tags">
+        <span class="product__cat" id="d-cat"></span>
+        <span class="product__kubun" id="d-kubun"></span>
       </div>
-      <p class="s-pop__text" id="d-text"></p>
+      <h2 class="product__name" id="d-name"></h2>
+      <p class="product__copy" id="d-copy"></p>
+      <p class="product__spec" id="d-spec"></p>
+
+      <section class="product__sec" id="sec-effects">
+        <h3>効能・効果</h3>
+        <p id="d-effects"></p>
+      </section>
+
+      <section class="product__sec" id="sec-usage">
+        <h3>用法・用量</h3>
+        <table class="product__table">
+          <thead><tr><th>年齢</th><th>1回量</th><th>服用回数など</th></tr></thead>
+          <tbody id="d-usage"></tbody>
+        </table>
+        <p class="product__note" id="d-usage-note"></p>
+      </section>
+
+      <section class="product__sec" id="sec-ingredients">
+        <h3>成分・分量 <small id="d-per"></small></h3>
+        <table class="product__table">
+          <tbody id="d-ingredients"></tbody>
+        </table>
+      </section>
+
+      <section class="product__sec" id="sec-cautions">
+        <h3>使用上の注意</h3>
+        <ul class="product__list" id="d-cautions"></ul>
+      </section>
+
+      <section class="product__sec" id="sec-storage">
+        <h3>保管及び取扱い上の注意</h3>
+        <p id="d-storage"></p>
+      </section>
+
+      <p class="s-note">この製品は卒業制作のための架空の医薬品です。実在する成分・製品ではありません。</p>
+    </div>
+
+    <div class="product__buy">
+      <div>
+        <span class="product__price" id="d-price"></span>
+        <span class="product__tax">税込</span>
+      </div>
       <button class="s-btn s-btn--main" type="button" id="d-add">カートに入れる</button>
-      <button class="s-btn s-btn--ghost" type="button" id="d-close">やめる</button>
     </div>
   </div>
 

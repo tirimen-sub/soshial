@@ -10,7 +10,34 @@ const f = {
   category: document.getElementById('f-category'),
   price: document.getElementById('f-price'),
   text: document.getElementById('f-text'),
+  kubun: document.getElementById('f-kubun'),
+  copy: document.getElementById('f-copy'),
+  form: document.getElementById('f-form'),
+  volume: document.getElementById('f-volume'),
+  effects: document.getElementById('f-effects'),
+  usage: document.getElementById('f-usage'),
+  usageNote: document.getElementById('f-usage-note'),
+  ingredientsPer: document.getElementById('f-per'),
+  image: document.getElementById('f-image'),
+  ingredients: document.getElementById('f-ingredients'),
+  cautions: document.getElementById('f-cautions'),
+  storage: document.getElementById('f-storage'),
 };
+
+// 「A｜B｜C」の行 ⇔ オブジェクトの配列（半角の | でも区切れる）
+function linesToRows(text, keys) {
+  return text.split('\n').map(l => l.trim()).filter(Boolean).map(l => {
+    const parts = l.split(/[｜|]/).map(x => x.trim());
+    const row = {};
+    keys.forEach((k, i) => { row[k] = parts[i] || ''; });
+    return row;
+  });
+}
+function rowsToLines(rows, keys) {
+  return (rows || []).map(r => keys.map(k => r[k] || '').join('｜').replace(/｜+$/, '')).join('\n');
+}
+const USAGE_KEYS = ['who', 'amount', 'times'];
+const ING_KEYS = ['name', 'amount'];
 const msg = document.getElementById('msg');
 const rows = document.getElementById('rows');
 const submitBtn = document.getElementById('submit');
@@ -102,7 +129,19 @@ form.addEventListener('submit', e => {
     category: f.category.value.trim(),
     price: Math.round(Number(f.price.value)),
     text: f.text.value.trim(),
+    kubun: f.kubun.value.trim(),
+    copy: f.copy.value.trim(),
+    form: f.form.value.trim(),
+    volume: f.volume.value.trim(),
+    effects: f.effects.value.trim(),
+    usage: linesToRows(f.usage.value, USAGE_KEYS),
+    usageNote: f.usageNote.value.trim(),
+    ingredientsPer: f.ingredientsPer.value.trim(),
+    ingredients: linesToRows(f.ingredients.value, ING_KEYS),
+    cautions: f.cautions.value.split('\n').map(l => l.trim()).filter(Boolean),
+    storage: f.storage.value.trim(),
   };
+  if (f.image.value.trim()) item.image = f.image.value.trim();
 
   if (!/^\d{13}$/.test(item.code)) return showMsg('バーコード番号は13桁の数字にしてください。', true);
   if (!isValidEAN13(item.code)) {
@@ -131,6 +170,11 @@ function startEdit(code) {
   f.category.value = p.category;
   f.price.value = p.price;
   f.text.value = p.text || '';
+  ['kubun', 'copy', 'form', 'volume', 'effects', 'usageNote', 'ingredientsPer', 'image', 'storage']
+    .forEach(k => { f[k].value = p[k] || ''; });
+  f.usage.value = rowsToLines(p.usage, USAGE_KEYS);
+  f.ingredients.value = rowsToLines(p.ingredients, ING_KEYS);
+  f.cautions.value = (p.cautions || []).join('\n');
   formTitle.textContent = '商品を編集';
   submitBtn.textContent = '更新する';
   cancelBtn.hidden = false;
@@ -234,7 +278,7 @@ function download(filename, text, type) {
 }
 
 document.getElementById('export').addEventListener('click', () => {
-  const body = products.map(p => '  ' + JSON.stringify(p)).join(',\n');
+  const body = JSON.stringify(products, null, 2).slice(2, -2);
   const text =
     '// 商品データ（商品登録画面から書き出したもの）\n' +
     '// register フォルダの products.js と入れ替えると、初期データになる\n' +
@@ -273,6 +317,7 @@ function parseProducts(text) {
   }
   if (!Array.isArray(list)) throw new Error('not array');
   return list.map(p => ({
+    ...p, // 製品ページ用の項目（用法・用量など）もそのまま残す
     code: String(p.code),
     name: String(p.name),
     category: String(p.category || ''),

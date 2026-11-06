@@ -39,8 +39,50 @@
         <label>価格（税込・円）
           <input id="f-price" type="number" min="0" step="1" required>
         </label>
-        <label class="is-wide">説明文
+        <label class="is-wide">説明文（一覧やカードに出る短い文）
           <textarea id="f-text" rows="2"></textarea>
+        </label>
+
+        <p class="form__group is-wide">製品ページの内容（セルフレジで読み取ったときに出る）</p>
+        <label>区分
+          <input id="f-kubun" list="kubun-list" placeholder="例：第2類医薬品">
+          <datalist id="kubun-list">
+            <option value="第1類医薬品"><option value="指定第2類医薬品"><option value="第2類医薬品">
+            <option value="第3類医薬品"><option value="指定医薬部外品"><option value="医薬部外品">
+          </datalist>
+        </label>
+        <label>キャッチコピー
+          <input id="f-copy">
+        </label>
+        <label>剤形
+          <input id="f-form" placeholder="例：錠剤">
+        </label>
+        <label>内容量
+          <input id="f-volume" placeholder="例：24錠">
+        </label>
+        <label class="is-wide">効能・効果
+          <textarea id="f-effects" rows="2"></textarea>
+        </label>
+        <label class="is-wide">用法・用量（1行に1つ。「年齢｜1回量｜服用回数など」の形で）
+          <textarea id="f-usage" rows="3" placeholder="成人（15歳以上）｜2錠｜1日3回 食後&#10;15歳未満｜服用しないこと"></textarea>
+        </label>
+        <label class="is-wide">用法・用量の補足
+          <input id="f-usage-note" placeholder="例：水またはぬるま湯で服用してください。">
+        </label>
+        <label>成分の基準量
+          <input id="f-per" placeholder="例：3錠中">
+        </label>
+        <label>商品画像のパス（任意）
+          <input id="f-image" placeholder="例：images/pain-s.png">
+        </label>
+        <label class="is-wide">成分・分量（1行に1つ。「成分名｜分量」の形で）
+          <textarea id="f-ingredients" rows="3" placeholder="イタミトール｜200mg"></textarea>
+        </label>
+        <label class="is-wide">使用上の注意（1行に1つ）
+          <textarea id="f-cautions" rows="3"></textarea>
+        </label>
+        <label class="is-wide">保管及び取扱い上の注意
+          <textarea id="f-storage" rows="2"></textarea>
         </label>
         <div class="form__actions">
           <button class="btn btn--main" type="submit" id="submit">追加する</button>

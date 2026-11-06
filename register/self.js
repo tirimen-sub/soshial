@@ -108,27 +108,62 @@ function handleCode(code) {
   openDetail(p);
 }
 
-// ---------- 商品のポップアップ ----------
+// ---------- 製品ページ ----------
 function openDetail(p) {
   current = p;
   pauseScanner();
-  $('d-img').innerHTML = p.image ? `<img src="${escapeHTML(p.image)}" alt="">` : '製品画像';
-  $('d-cat').textContent = p.category;
-  $('d-name').textContent = p.name;
-  $('d-price').textContent = yen(p.price) + '（税込）';
-  $('d-text').textContent = p.text || '';
+  const text = (id, v) => { $(id).textContent = v || ''; };
+  const section = (id, has) => { $(id).hidden = !has; };
+
+  $('d-img').innerHTML = p.image
+    ? `<img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.name)}">`
+    : `<span class="product__ph">${escapeHTML(p.name)}<small>製品画像</small></span>`;
+  text('d-cat', p.category);
+  text('d-kubun', p.kubun);
+  $('d-kubun').hidden = !p.kubun;
+  text('d-name', p.name);
+  text('d-copy', p.copy || p.text);
+  text('d-spec', [p.form, p.volume].filter(Boolean).join('・'));
+  text('d-price', yen(p.price));
+
+  text('d-effects', p.effects);
+  section('sec-effects', !!p.effects);
+
+  const usage = p.usage || [];
+  $('d-usage').innerHTML = usage.map(u => `<tr>
+      <td>${escapeHTML(u.who)}</td>
+      <td${u.times ? '' : ' colspan="2"'}>${escapeHTML(u.amount)}</td>
+      ${u.times ? `<td>${escapeHTML(u.times)}</td>` : ''}
+    </tr>`).join('');
+  text('d-usage-note', p.usageNote);
+  section('sec-usage', usage.length > 0);
+
+  const ing = p.ingredients || [];
+  $('d-ingredients').innerHTML = ing.map(i =>
+    `<tr><td>${escapeHTML(i.name)}</td><td class="num">${escapeHTML(i.amount)}</td></tr>`).join('');
+  text('d-per', p.ingredientsPer ? `（${p.ingredientsPer}）` : '');
+  section('sec-ingredients', ing.length > 0);
+
+  const cautions = p.cautions || [];
+  $('d-cautions').innerHTML = cautions.map(c => `<li>${escapeHTML(c)}</li>`).join('');
+  section('sec-cautions', cautions.length > 0);
+
+  text('d-storage', p.storage);
+  section('sec-storage', !!p.storage);
+
   $('detail').hidden = false;
-  $('d-add').focus();
+  $('detail').scrollTop = 0;
+  document.body.classList.add('is-locked');
 }
 
 function closeDetail() {
   $('detail').hidden = true;
+  document.body.classList.remove('is-locked');
   current = null;
   resumeScanner();
 }
 
 $('d-close').addEventListener('click', closeDetail);
-$('detail').addEventListener('click', e => { if (e.target.id === 'detail') closeDetail(); });
 
 // 1つずつカートに入れる（個数はカート画面で変えられる）
 $('d-add').addEventListener('click', () => {
