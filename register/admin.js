@@ -282,6 +282,8 @@ document.getElementById('export').addEventListener('click', () => {
   const text =
     '// 商品データ（商品登録画面から書き出したもの）\n' +
     '// register フォルダの products.js と入れ替えると、初期データになる\n' +
+    '// PRODUCTS_VERSION は書き出した日時。変わると各端末の保存よりこのファイルが優先される\n' +
+    'window.PRODUCTS_VERSION = "' + new Date().toISOString() + '";\n' +
     'window.DEFAULT_PRODUCTS = [\n' + body + '\n];\n';
   download('products.js', text, 'text/javascript');
 });

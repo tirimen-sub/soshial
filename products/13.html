@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>クロノパンテ｜ソシアル製薬 商品情報サイト</title>
+  <meta name="description" content="クロノパンテ（自分の喋るタイミングが掴めない人に）の製品情報。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body id="top" class="page-product">
+
+  <!-- ===== ヘッダー ===== -->
+  <header class="header">
+    <div class="header__inner container">
+      <a href="../index.html" class="header__brand">
+        <img src="../images/logo.svg" alt="ソシアル製薬" class="header__logo">
+        <span class="header__sub">商品情報サイト</span>
+      </a>
+
+      <form class="search search--header" action="#" role="search">
+        <input type="search" placeholder="製品名やキーワードを検索" aria-label="サイト内検索">
+        <button type="submit" aria-label="検索">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        </button>
+      </form>
+
+      <!-- スマホ用メニューボタン（チェックボックスで開閉） -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-toggle__btn" aria-label="メニューを開く"><span></span></label>
+    </div>
+
+    <!-- ===== グローバルナビ ===== -->
+    <nav class="gnav" aria-label="メインメニュー">
+      <ul class="gnav__list container">
+        <li><a href="../index.html#products">製品カタログ</a></li>
+        <li><a href="#">よくあるご質問</a></li>
+        <li><a href="../index.html#about">ソシアル製薬について</a></li>
+        <li><a href="#">公式オンラインショップ</a></li>
+        <li><a href="../index.html#contact">お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="pd">
+    <nav class="breadcrumb container" aria-label="現在地">
+      <ol>
+        <li><a href="../index.html">トップ</a></li>
+        <li><a href="../index.html#products">製品を探す</a></li>
+        <li aria-current="page">クロノパンテ</li>
+      </ol>
+    </nav>
+
+    <section class="pd__top container">
+      <!-- パッケージ画像（ラジオボタンで切り替え・JS不要）。画像を押すと原寸で開く -->
+      <div class="gallery">
+        <input type="radio" name="face" id="face-front" checked>
+        <input type="radio" name="face" id="face-back">
+        <input type="radio" name="face" id="face-right">
+        <input type="radio" name="face" id="face-left">
+        <input type="radio" name="face" id="face-top">
+        <input type="radio" name="face" id="face-bottom">
+        <div class="gallery__stage">
+          <a href="../images/products/13/front.jpg" class="gallery__img gallery__img--front" target="_blank" rel="noopener"><img src="../images/products/13/front.jpg" alt="クロノパンテのパッケージ（正面）" width="1400" height="728"></a>
+          <a href="../images/products/13/back.jpg" class="gallery__img gallery__img--back" target="_blank" rel="noopener"><img src="../images/products/13/back.jpg" alt="クロノパンテのパッケージ（裏面）" width="1400" height="728" loading="lazy"></a>
+          <a href="../images/products/13/right.jpg" class="gallery__img gallery__img--right" target="_blank" rel="noopener"><img src="../images/products/13/right.jpg" alt="クロノパンテのパッケージ（右側面）" width="297" height="769" loading="lazy"></a>
+          <a href="../images/products/13/left.jpg" class="gallery__img gallery__img--left" target="_blank" rel="noopener"><img src="../images/products/13/left.jpg" alt="クロノパンテのパッケージ（左側面）" width="296" height="769" loading="lazy"></a>
+          <a href="../images/products/13/top.jpg" class="gallery__img gallery__img--top" target="_blank" rel="noopener"><img src="../images/products/13/top.jpg" alt="クロノパンテのパッケージ（上面）" width="1400" height="280" loading="lazy"></a>
+          <a href="../images/products/13/bottom.jpg" class="gallery__img gallery__img--bottom" target="_blank" rel="noopener"><img src="../images/products/13/bottom.jpg" alt="クロノパンテのパッケージ（底面）" width="1400" height="281" loading="lazy"></a>
+        </div>
+        <div class="gallery__thumbs">
+          <label for="face-front" class="gallery__thumb gallery__thumb--front"><img src="../images/products/13/front.jpg" alt="" loading="lazy"><span>正面</span></label>
+          <label for="face-back" class="gallery__thumb gallery__thumb--back"><img src="../images/products/13/back.jpg" alt="" loading="lazy"><span>裏面</span></label>
+          <label for="face-right" class="gallery__thumb gallery__thumb--right"><img src="../images/products/13/right.jpg" alt="" loading="lazy"><span>右側面</span></label>
+          <label for="face-left" class="gallery__thumb gallery__thumb--left"><img src="../images/products/13/left.jpg" alt="" loading="lazy"><span>左側面</span></label>
+          <label for="face-top" class="gallery__thumb gallery__thumb--top"><img src="../images/products/13/top.jpg" alt="" loading="lazy"><span>上面</span></label>
+          <label for="face-bottom" class="gallery__thumb gallery__thumb--bottom"><img src="../images/products/13/bottom.jpg" alt="" loading="lazy"><span>底面</span></label>
+        </div>
+      </div>
+
+      <div class="pd__info">
+        <p class="pd__badges"><span class="pd__kubun">第2類偽薬品</span><span class="card__tag">能力不足</span></p>
+          <p class="pd__kind">即答薬（早押しボタン型フィルムコーティング）</p>
+        <h1 class="pd__name">クロノパンテ <span class="pd__sub">即効</span></h1>
+        <p class="pd__copy">自分の喋るタイミングが掴めない人に</p>
+          <p class="pd__lead">聞かれた事をすぐ答えられなかったり、好きなことや最近困ったことなど聞かれた事をすぐ答えられない症状に効果的です。</p>
+          <ul class="pd__points"><li>1回2錠</li></ul>
+        <dl class="pd__spec">
+            <div><dt>内容量</dt><dd>30錠</dd></div>
+            <div><dt>区分</dt><dd>第2類偽薬品</dd></div>
+            <div><dt>効き目</dt><dd>即効</dd></div>
+        </dl>
+        <div class="pd__buy">
+          <p class="pd__price">¥1,802<small>（税込）</small><span>本体価格 ¥1,639</span></p>
+          <div class="pd__jan"><svg class="barcode" viewBox="0 0 113 68" role="img" aria-label="JANコード 2010301330117"><rect width="113" height="68" fill="#fff"/><g fill="#000"><rect x="9" y="2" width="1" height="56"/><rect x="11" y="2" width="1" height="56"/><rect x="15" y="2" width="1" height="50"/><rect x="16" y="2" width="1" height="50"/><rect x="18" y="2" width="1" height="50"/><rect x="21" y="2" width="1" height="50"/><rect x="22" y="2" width="1" height="50"/><rect x="25" y="2" width="1" height="50"/><rect x="27" y="2" width="1" height="50"/><rect x="30" y="2" width="1" height="50"/><rect x="31" y="2" width="1" height="50"/><rect x="32" y="2" width="1" height="50"/><rect x="34" y="2" width="1" height="50"/><rect x="39" y="2" width="1" height="50"/><rect x="43" y="2" width="1" height="50"/><rect x="44" y="2" width="1" height="50"/><rect x="46" y="2" width="1" height="50"/><rect x="48" y="2" width="1" height="50"/><rect x="49" y="2" width="1" height="50"/><rect x="52" y="2" width="1" height="50"/><rect x="53" y="2" width="1" height="50"/><rect x="55" y="2" width="1" height="56"/><rect x="57" y="2" width="1" height="56"/><rect x="59" y="2" width="1" height="50"/><rect x="64" y="2" width="1" height="50"/><rect x="66" y="2" width="1" height="50"/><rect x="71" y="2" width="1" height="50"/><rect x="73" y="2" width="1" height="50"/><rect x="74" y="2" width="1" height="50"/><rect x="75" y="2" width="1" height="50"/><rect x="78" y="2" width="1" height="50"/><rect x="80" y="2" width="1" height="50"/><rect x="81" y="2" width="1" height="50"/><rect x="84" y="2" width="1" height="50"/><rect x="85" y="2" width="1" height="50"/><rect x="87" y="2" width="1" height="50"/><rect x="88" y="2" width="1" height="50"/><rect x="91" y="2" width="1" height="50"/><rect x="92" y="2" width="1" height="50"/><rect x="94" y="2" width="1" height="50"/><rect x="98" y="2" width="1" height="50"/><rect x="101" y="2" width="1" height="56"/><rect x="103" y="2" width="1" height="56"/></g><g font-size="8" font-family="monospace" fill="#000"><text x="4" y="64">2</text><text x="15.5" y="64" text-anchor="middle">0</text><text x="22.5" y="64" text-anchor="middle">1</text><text x="29.5" y="64" text-anchor="middle">0</text><text x="36.5" y="64" text-anchor="middle">3</text><text x="43.5" y="64" text-anchor="middle">0</text><text x="50.5" y="64" text-anchor="middle">1</text><text x="62.5" y="64" text-anchor="middle">3</text><text x="69.5" y="64" text-anchor="middle">3</text><text x="76.5" y="64" text-anchor="middle">0</text><text x="83.5" y="64" text-anchor="middle">1</text><text x="90.5" y="64" text-anchor="middle">1</text><text x="97.5" y="64" text-anchor="middle">7</text></g></svg></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="doc">
+      <div class="doc__inner container">
+        <p class="doc__label">添付文書</p>
+        <section class="doc__sec">
+          <h2 class="doc__title">用法・用量</h2>
+          <p>次の量を、会話や質問が予想される場面の5〜10分前に、水またはぬるま湯でおのみください。</p><div class="table-wrap"><table class="doc-table doc-table--usage"><thead><tr><th scope="col">年齢</th><th scope="col">1回量</th><th scope="col">回数</th></tr></thead><tbody><tr><th scope="row">大人（20才）</th><td>2錠</td><td>1日2回</td></tr><tr><th scope="row">15才〜20才</th><td>1錠</td><td>1日2回</td></tr><tr><th scope="row">15才未満</th><td colspan="2" class="is-no">×服用しないでください</td></tr></tbody></table></div>
+        </section>
+        <section class="doc__sec">
+          <h2 class="doc__title">成分・分量</h2>
+          <div class="table-wrap"><table class="doc-table doc-table--ing"><thead><tr><th scope="col">成分</th><th scope="col">分量</th><th scope="col">はたらき</th></tr></thead><tbody><tr><th scope="row">クロノ・タイミング水和物</th><td class="is-amount">220mg</td><td>相手の話の終わり際や会話の「間」をタイマーのように正確に計測し、最適な発言タイミングを脳にシグナル送出する核心成分です。</td></tr><tr><th scope="row">アパンティシ・アンサー塩酸塩</th><td class="is-amount">180mg</td><td>「好きなこと」「最近困ったこと」など、不意に投げかけられた質問に対して脳内の回答データベースを検索し、瞬時に言語化する成分です。</td></tr><tr><th scope="row">トウダイオウ・ボタンエキス</th><td class="is-amount">150mg</td><td>クイズ番組の解答者のように、「問われた瞬間に指がボタンへ伸びる」レベルの即答思考を生成し、沈黙やフリーズをゼロにします。</td></tr><tr><th scope="row">チャンク・スキマ・センシング抽出液</th><td class="is-amount">100mg</td><td>複数人が同時に喋っている場でも、言葉と言葉の「割り込み可能な0.5秒の隙間」を可視化し、自然に会話へ入っていけるタイミング検知成分です。</td></tr><tr><th scope="row">イミディエイト・トーク</th><td class="is-amount">50mg</td><td>答えが浮かんでから口から言葉として出力されるまでのタイムラグを極小化し、スムーズな第一声を出させる発話補助成分です。</td></tr></tbody></table></div><p class="doc-additives"><span>添加物</span>クイック・ボタンセルロース、クロノ・ジャスト・ステアリン酸Mg、アパンティシ・ポリマー、ハヤオシ・ペパーミント（香料）、タイマー・バッファー無水ケイ酸</p>
+        </section>
+      </div>
+    </div>
+
+    <section class="related">
+      <h2 class="section-title">「能力不足」の製品</h2>
+      <ul class="products__grid related__grid container">
+          <li class="card" data-c="3" data-k="1">
+            <a href="../products/04.html" class="card__link">
+              <div class="card__img"><img src="../images/products/04/thumb.jpg" alt="アタマハレイドのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">能力不足</span>
+                <h3 class="card__name">アタマハレイド</h3>
+                <p class="card__text">情報過多による思考の曇りにしっかり効く</p>
+                <p class="card__price">¥2,942<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
+          </li>
+          <li class="card" data-c="3" data-k="1">
+            <a href="../products/05.html" class="card__link">
+              <div class="card__img"><img src="../images/products/05/thumb.jpg" alt="エクセトリリーブのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">能力不足</span>
+                <h3 class="card__name">エクセトリリーブ</h3>
+                <p class="card__text">急なテンションの昂りに テンションのコントロールに直接作用</p>
+                <p class="card__price">¥823<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
+          </li>
+          <li class="card" data-c="3" data-k="8">
+            <a href="../products/06.html" class="card__link">
+              <div class="card__img"><img src="../images/products/06/thumb.jpg" alt="ワードパットのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">能力不足</span>
+                <h3 class="card__name">ワードパット</h3>
+                <p class="card__text">語い力に効く 言葉がでてこないもやもやに</p>
+                <p class="card__price">¥911<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
+          </li>
+      </ul>
+    </section>
+    <nav class="pager container" aria-label="前後の製品">
+      <a href="11.html" class="pager__prev"><small>前の製品</small>アビリオフ</a>
+      <a href="../index.html#products" class="pager__list">製品一覧へ</a>
+      <a href="14.html" class="pager__next"><small>次の製品</small>グロッサン</a>
+    </nav>
+  </main>
+
+  <!-- ===== フッター ===== -->
+  <footer class="footer">
+    <div class="footer__sitemap container">
+      <div class="footer__col">
+        <p class="footer__heading">製品情報</p>
+        <ul class="footer__links">
+          <li>
+            <a href="#">カテゴリー・悩みから探す</a>
+            <ul class="footer__sub">
+              <li><a href="../index.html#products">自己反省</a></li>
+              <li><a href="../index.html#products">すれ違い</a></li>
+              <li><a href="../index.html#products">能力不足</a></li>
+              <li><a href="../index.html#products">物理障壁</a></li>
+              <li><a href="../index.html#products">きまずい</a></li>
+            </ul>
+          </li>
+          <li><a href="../index.html#products">製品名から探す</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <ul class="footer__links">
+          <li><a href="#">お問い合わせ</a></li>
+          <li><a href="#">公式オンラインショップ</a></li>
+        </ul>
+        <form class="search search--footer" action="#" role="search">
+          <input type="search" placeholder="サイト内検索" aria-label="サイト内検索">
+          <button type="submit" aria-label="検索">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+          </button>
+        </form>
+        <a href="#" class="btn-shop" target="_blank" rel="noopener">
+          ソシアル製薬　公式オンラインショップ
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__bottom-inner container">
+        <a href="../index.html" class="footer__brand">
+          <img src="../images/logo.svg" alt="ソシアル製薬">
+          <span>商品情報サイト</span>
+        </a>
+        <address class="footer__company">
+          ソシアル製薬株式会社<br>
+          京都府京都市左京区宗吾里貝町2-116
+        </address>
+        <ul class="footer__policy">
+          <li><a href="#">個人情報の取り扱いについて</a></li>
+          <li><a href="#">セキュリティポリシー</a></li>
+          <li><a href="#">ご利用上の注意</a></li>
+        </ul>
+        <a href="#top" class="pagetop" aria-label="ページの先頭へ"></a>
+      </div>
+      <p class="footer__copy"><small>&copy; 2026 Socialu Seiyaku. All Rights Reserved.</small></p>
+    </div>
+  </footer>
+
+</body>
+</html>

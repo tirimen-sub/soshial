@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ソシアル製薬 商品情報サイト</title>
-  <meta name="description" content="ソシアル製薬の製品情報サイトです。カテゴリーやお悩み、製品名から製品を探せます。">
+  <meta name="description" content="ソシアル製薬の製品情報サイトです。コミュニケーションのお悩みや製品名から製品を探せます。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
@@ -37,7 +37,7 @@
       <ul class="gnav__list container">
         <li><a href="#products">製品カタログ</a></li>
         <li><a href="#">よくあるご質問</a></li>
-        <li><a href="#">健康お役立ち情報</a></li>
+        <li><a href="#about">ソシアル製薬について</a></li>
         <li><a href="#">公式オンラインショップ</a></li>
         <li><a href="#contact">お問い合わせ</a></li>
       </ul>
@@ -50,23 +50,41 @@
       <div class="hero__track">
         <div class="hero__slide is-active">
           <div class="hero__img hero__img--1">
-            <p class="hero__copy">毎日の「ちょっと不調」に、<br>やさしく寄りそう。</p>
+            <div class="hero__text">
+              <p class="hero__eyebrow">ソシアル製薬</p>
+              <p class="hero__copy">コミュニケーションの<br>「かゆいところ」に、<br>クスッと笑える処方箋を。</p>
+            </div>
           </div>
         </div>
         <div class="hero__slide">
-          <div class="hero__img hero__img--2">
-            <p class="hero__copy">新発売<br>ソシアル鼻炎カプセルEX</p>
-          </div>
+          <a href="products/02.html" class="hero__img hero__img--2 hero__img--product">
+            <div class="hero__text">
+              <p class="hero__eyebrow">総合振り返り防止薬</p>
+              <p class="hero__copy">選択を間違えたあとの自己批評・反省会に</p>
+              <p class="hero__name">リフレバスター</p>
+            </div>
+            <img src="images/products/02/front.jpg" alt="リフレバスターのパッケージ" class="hero__pkg">
+          </a>
         </div>
         <div class="hero__slide">
-          <div class="hero__img hero__img--3">
-            <p class="hero__copy">季節の変わり目の<br>体調管理ガイド</p>
-          </div>
+          <a href="products/14.html" class="hero__img hero__img--3 hero__img--product">
+            <div class="hero__text">
+              <p class="hero__eyebrow">口腔内崩壊錠</p>
+              <p class="hero__copy">思い通りにならない滑舌に</p>
+              <p class="hero__name">グロッサン</p>
+            </div>
+            <img src="images/products/14/front.jpg" alt="グロッサンのパッケージ" class="hero__pkg">
+          </a>
         </div>
         <div class="hero__slide">
-          <div class="hero__img hero__img--4">
-            <p class="hero__copy">公式オンラインショップ<br>オープン</p>
-          </div>
+          <a href="products/19.html" class="hero__img hero__img--4 hero__img--product">
+            <div class="hero__text">
+              <p class="hero__eyebrow">耳孔内ノイズキャンセリング点耳薬</p>
+              <p class="hero__copy">映画・ライブ時など一人で集中したい時に</p>
+              <p class="hero__name">ソロゾーン</p>
+            </div>
+            <img src="images/products/19/front.jpg" alt="ソロゾーンのパッケージ" class="hero__pkg">
+          </a>
         </div>
       </div>
 
@@ -112,105 +130,283 @@
           </form>
 
           <ul class="chips chips--category container">
-            <li><a href="#">かぜ・発熱</a></li>
-            <li><a href="#">頭痛・痛み</a></li>
-            <li><a href="#">胃腸</a></li>
-            <li><a href="#">鼻炎・アレルギー</a></li>
-            <li><a href="#">目の疲れ</a></li>
-            <li><a href="#">肌トラブル</a></li>
-            <li><a href="#">疲労・滋養</a></li>
-            <li><a href="#">睡眠</a></li>
+            <li><input type="radio" name="filter" id="f-all" checked><label for="f-all">すべて</label></li>
+            <li><input type="radio" name="filter" id="f-c1"><label for="f-c1">自己反省<small>後悔・一人反省会・考えすぎ</small></label></li>
+            <li><input type="radio" name="filter" id="f-c2"><label for="f-c2">すれ違い<small>建前・距離感・価値観のズレ</small></label></li>
+            <li><input type="radio" name="filter" id="f-c3"><label for="f-c3">能力不足<small>言葉・自信・タイミング</small></label></li>
+            <li><input type="radio" name="filter" id="f-c4"><label for="f-c4">物理障壁<small>滑舌・名前・切り替え</small></label></li>
+            <li><input type="radio" name="filter" id="f-c5"><label for="f-c5">きまずい<small>誘う・断る・話しかけられる</small></label></li>
           </ul>
 
           <ul class="chips chips--name container">
-            <li><a href="#">あ行</a></li>
-            <li><a href="#">か行</a></li>
-            <li><a href="#">さ行</a></li>
-            <li><a href="#">た行</a></li>
-            <li><a href="#">な行</a></li>
-            <li><a href="#">は行</a></li>
-            <li><a href="#">ま行</a></li>
-            <li><a href="#">や・ら・わ行</a></li>
+            <li><label for="f-all">すべて</label></li>
+            <li><input type="radio" name="filter" id="f-k1"><label for="f-k1">あ行</label></li>
+            <li><input type="radio" name="filter" id="f-k2"><label for="f-k2">か行</label></li>
+            <li><input type="radio" name="filter" id="f-k3"><label for="f-k3">さ行</label></li>
+            <li><input type="radio" name="filter" id="f-k4"><label for="f-k4">た行</label></li>
+            <li><input type="radio" name="filter" id="f-k6"><label for="f-k6">は行</label></li>
+            <li><input type="radio" name="filter" id="f-k7"><label for="f-k7">ま行</label></li>
+            <li><input type="radio" name="filter" id="f-k8"><label for="f-k8">や・ら・わ行</label></li>
           </ul>
         </div>
       </div>
 
       <!-- 製品一覧 -->
       <div class="products">
+        <p class="products__count container">全19製品</p>
         <ul class="products__grid container">
-          <li class="card">
-            <div class="card__img">製品画像</div>
-            <div class="card__body">
-              <span class="card__tag">かぜ・発熱</span>
-              <h3 class="card__name">ソシアルかぜ顆粒</h3>
-              <p class="card__text">のどの痛み・発熱など、かぜの諸症状に。</p>
-              <a href="#" class="btn-more">くわしく見る</a>
-            </div>
+          <li class="card" data-c="2" data-k="1">
+            <a href="products/01.html" class="card__link">
+              <div class="card__img"><img src="images/products/01/thumb.jpg" alt="N-ペルソギルのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">すれ違い</span>
+                <h3 class="card__name">N-ペルソギル</h3>
+                <p class="card__text">建前などのつらい罪悪感に</p>
+                <p class="card__price">¥1,538<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
           </li>
-          <li class="card">
-            <div class="card__img">製品画像</div>
-            <div class="card__body">
-              <span class="card__tag">頭痛・痛み</span>
-              <h3 class="card__name">ソシアルペインS</h3>
-              <p class="card__text">つらい頭痛・生理痛にすばやく効く。</p>
-              <a href="#" class="btn-more">くわしく見る</a>
-            </div>
+          <li class="card" data-c="1" data-k="8">
+            <a href="products/02.html" class="card__link">
+              <div class="card__img"><img src="images/products/02/thumb.jpg" alt="リフレバスターのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">自己反省</span>
+                <h3 class="card__name">リフレバスター</h3>
+                <p class="card__text">選択を間違えたあとの自己批評・反省会に</p>
+                <p class="card__price">¥1,681<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
           </li>
-          <li class="card">
-            <div class="card__img">製品画像</div>
-            <div class="card__body">
-              <span class="card__tag">胃腸</span>
-              <h3 class="card__name">ソシアル胃腸錠</h3>
-              <p class="card__text">胃もたれ・胸やけをすっきりケア。</p>
-              <a href="#" class="btn-more">くわしく見る</a>
-            </div>
+          <li class="card" data-c="1" data-k="4">
+            <a href="products/03.html" class="card__link">
+              <div class="card__img"><img src="images/products/03/thumb.jpg" alt="T-Tリリーフのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">自己反省</span>
+                <h3 class="card__name">T-Tリリーフ</h3>
+                <p class="card__text">考えすぎによる不安に 身のこなしに直接効く</p>
+                <p class="card__price">¥957<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
           </li>
-          <li class="card">
-            <div class="card__img">製品画像</div>
-            <div class="card__body">
-              <span class="card__tag">鼻炎・アレルギー</span>
-              <h3 class="card__name">ソシアル鼻炎カプセルEX</h3>
-              <p class="card__text">くしゃみ・鼻水を1日1回でおさえる。</p>
-              <a href="#" class="btn-more">くわしく見る</a>
-            </div>
+          <li class="card" data-c="3" data-k="1">
+            <a href="products/04.html" class="card__link">
+              <div class="card__img"><img src="images/products/04/thumb.jpg" alt="アタマハレイドのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">能力不足</span>
+                <h3 class="card__name">アタマハレイド</h3>
+                <p class="card__text">情報過多による思考の曇りにしっかり効く</p>
+                <p class="card__price">¥2,942<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
           </li>
-          <li class="card">
-            <div class="card__img">製品画像</div>
-            <div class="card__body">
-              <span class="card__tag">目の疲れ</span>
-              <h3 class="card__name">ソシアルアイクール</h3>
-              <p class="card__text">パソコン・スマホで疲れた目に。</p>
-              <a href="#" class="btn-more">くわしく見る</a>
-            </div>
+          <li class="card" data-c="3" data-k="1">
+            <a href="products/05.html" class="card__link">
+              <div class="card__img"><img src="images/products/05/thumb.jpg" alt="エクセトリリーブのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">能力不足</span>
+                <h3 class="card__name">エクセトリリーブ</h3>
+                <p class="card__text">急なテンションの昂りに テンションのコントロールに直接作用</p>
+                <p class="card__price">¥823<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
           </li>
-          <li class="card">
-            <div class="card__img">製品画像</div>
-            <div class="card__body">
-              <span class="card__tag">肌トラブル</span>
-              <h3 class="card__name">ソシアルスキンバーム</h3>
-              <p class="card__text">かゆみ・肌荒れをやさしく保護。</p>
-              <a href="#" class="btn-more">くわしく見る</a>
-            </div>
+          <li class="card" data-c="3" data-k="8">
+            <a href="products/06.html" class="card__link">
+              <div class="card__img"><img src="images/products/06/thumb.jpg" alt="ワードパットのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">能力不足</span>
+                <h3 class="card__name">ワードパット</h3>
+                <p class="card__text">語い力に効く 言葉がでてこないもやもやに</p>
+                <p class="card__price">¥911<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
           </li>
-          <li class="card">
-            <div class="card__img">製品画像</div>
-            <div class="card__body">
-              <span class="card__tag">疲労・滋養</span>
-              <h3 class="card__name">ソシアルリカバリー液</h3>
-              <p class="card__text">肉体疲労時の栄養補給に。</p>
-              <a href="#" class="btn-more">くわしく見る</a>
-            </div>
+          <li class="card" data-c="3" data-k="3">
+            <a href="products/07.html" class="card__link">
+              <div class="card__img"><img src="images/products/07/thumb.jpg" alt="セルフィスティーム顆粒のパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">能力不足</span>
+                <h3 class="card__name">セルフィスティーム顆粒</h3>
+                <p class="card__text">足りない自信に 自己肯定感に効く</p>
+                <p class="card__price">¥822<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
           </li>
-          <li class="card">
-            <div class="card__img">製品画像</div>
-            <div class="card__body">
-              <span class="card__tag">睡眠</span>
-              <h3 class="card__name">ソシアルナイトレスト</h3>
-              <p class="card__text">一時的な不眠の緩和に。</p>
-              <a href="#" class="btn-more">くわしく見る</a>
-            </div>
+          <li class="card" data-c="2" data-k="7">
+            <a href="products/08.html" class="card__link">
+              <div class="card__img"><img src="images/products/08/thumb.jpg" alt="メジルス塩酸塩-Cのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">すれ違い</span>
+                <h3 class="card__name">メジルス塩酸塩-C</h3>
+                <p class="card__text">悩む人との距離感に 適性距離感レーダー発現成分配合</p>
+                <p class="card__price">¥262<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
+          </li>
+          <li class="card" data-c="3" data-k="7">
+            <a href="products/09.html" class="card__link">
+              <div class="card__img"><img src="images/products/09/thumb.jpg" alt="マルチルックのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">能力不足</span>
+                <h3 class="card__name">マルチルック</h3>
+                <p class="card__text">散る集中・慌てる脳内に 目を見ながら喋れるようになる</p>
+                <p class="card__price">¥372<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
+          </li>
+          <li class="card" data-c="4" data-k="6">
+            <a href="products/10.html" class="card__link">
+              <div class="card__img"><img src="images/products/10/thumb.jpg" alt="ペルソスイッチのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">物理障壁</span>
+                <h3 class="card__name">ペルソスイッチ</h3>
+                <p class="card__text">家と外のペルソナの乖離に</p>
+                <p class="card__price">¥822<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
+          </li>
+          <li class="card" data-c="3" data-k="1">
+            <a href="products/11.html" class="card__link">
+              <div class="card__img"><img src="images/products/11/thumb.jpg" alt="アビリオフのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">能力不足</span>
+                <h3 class="card__name">アビリオフ</h3>
+                <p class="card__text">グループワークの無言受動的な空気の打開に</p>
+                <p class="card__price">¥602<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
+          </li>
+          <li class="card" data-c="3" data-k="2">
+            <a href="products/13.html" class="card__link">
+              <div class="card__img"><img src="images/products/13/thumb.jpg" alt="クロノパンテのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">能力不足</span>
+                <h3 class="card__name">クロノパンテ</h3>
+                <p class="card__text">自分の喋るタイミングが掴めない人に</p>
+                <p class="card__price">¥1,802<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
+          </li>
+          <li class="card" data-c="4" data-k="2">
+            <a href="products/14.html" class="card__link">
+              <div class="card__img"><img src="images/products/14/thumb.jpg" alt="グロッサンのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">物理障壁</span>
+                <h3 class="card__name">グロッサン</h3>
+                <p class="card__text">思い通りにならない滑舌に</p>
+                <p class="card__price">¥2,637<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
+          </li>
+          <li class="card" data-c="3" data-k="4">
+            <a href="products/15.html" class="card__link">
+              <div class="card__img"><img src="images/products/15/thumb.jpg" alt="ターンサイン散のパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">能力不足</span>
+                <h3 class="card__name">ターンサイン散</h3>
+                <p class="card__text">話が終わるタイミングがわからない人に</p>
+                <p class="card__price">¥550<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
+          </li>
+          <li class="card" data-c="1" data-k="8">
+            <a href="products/16.html" class="card__link">
+              <div class="card__img"><img src="images/products/16/thumb.jpg" alt="ルミナインのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">自己反省</span>
+                <h3 class="card__name">ルミナイン</h3>
+                <p class="card__text">過剰な自分の粗探しに終止符を</p>
+                <p class="card__price">¥1,405<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
+          </li>
+          <li class="card" data-c="4" data-k="1">
+            <a href="products/17.html" class="card__link">
+              <div class="card__img"><img src="images/products/17/thumb.jpg" alt="エピタグのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">物理障壁</span>
+                <h3 class="card__name">エピタグ</h3>
+                <p class="card__text">名前を覚えられないあなたへ</p>
+                <p class="card__price">¥609<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
+          </li>
+          <li class="card" data-c="5" data-k="1">
+            <a href="products/18.html" class="card__link">
+              <div class="card__img"><img src="images/products/18/thumb.jpg" alt="インビトールのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">きまずい</span>
+                <h3 class="card__name">インビトール</h3>
+                <p class="card__text">断られる不安・誘われ待ちのプレッシャーから開放</p>
+                <p class="card__price">¥547<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
+          </li>
+          <li class="card" data-c="5" data-k="3">
+            <a href="products/19.html" class="card__link">
+              <div class="card__img"><img src="images/products/19/thumb.jpg" alt="ソロゾーンのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">きまずい</span>
+                <h3 class="card__name">ソロゾーン</h3>
+                <p class="card__text">映画・ライブ時など一人で集中したい時に</p>
+                <p class="card__price">¥503<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
+          </li>
+          <li class="card" data-c="3" data-k="4">
+            <a href="products/20.html" class="card__link">
+              <div class="card__img"><img src="images/products/20/thumb.jpg" alt="テンプレナビのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">能力不足</span>
+                <h3 class="card__name">テンプレナビ</h3>
+                <p class="card__text">長い前置き・結論迷子に</p>
+                <p class="card__price">¥1,516<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
           </li>
         </ul>
+      </div>
+    </section>
+
+    <!-- ===== ソシアル製薬について ===== -->
+    <section class="about" id="about">
+      <div class="container">
+        <h2 class="section-title">ソシアル製薬について</h2>
+        <p class="about__lead"><span>コミュニケーションの</span><span>「かゆいところ」に、</span><br><span>クスッと笑える処方箋を。</span></p>
+        <dl class="about__list">
+          <div class="about__item">
+            <dt>Mission</dt>
+            <dd>見えにくいコミュニケーションの悩みを可視化し、共感の「あるある」へ消化する</dd>
+          </div>
+          <div class="about__item">
+            <dt>Vision</dt>
+            <dd>悩みを抱え込まず、ひみつ道具のようにユーモアへ昇華できる世界</dd>
+          </div>
+          <div class="about__item">
+            <dt>Values</dt>
+            <dd>安心 / ユーモア / 共有性</dd>
+          </div>
+        </dl>
+        <p class="about__note">※ソシアル製薬は卒業制作のための架空の企業です。掲載している製品・成分・効能はすべて架空のもので、実在の医薬品ではありません。</p>
       </div>
     </section>
 
@@ -233,17 +429,14 @@
           <li>
             <a href="#">カテゴリー・悩みから探す</a>
             <ul class="footer__sub">
-              <li><a href="#">かぜ・発熱</a></li>
-              <li><a href="#">頭痛・痛み</a></li>
-              <li><a href="#">胃腸</a></li>
-              <li><a href="#">鼻炎・アレルギー</a></li>
-              <li><a href="#">目の疲れ</a></li>
-              <li><a href="#">肌トラブル</a></li>
-              <li><a href="#">疲労・滋養</a></li>
-              <li><a href="#">睡眠</a></li>
+              <li><a href="#products">自己反省</a></li>
+              <li><a href="#products">すれ違い</a></li>
+              <li><a href="#products">能力不足</a></li>
+              <li><a href="#products">物理障壁</a></li>
+              <li><a href="#products">きまずい</a></li>
             </ul>
           </li>
-          <li><a href="#">製品名から探す</a></li>
+          <li><a href="#products">製品名から探す</a></li>
         </ul>
       </div>
 
@@ -271,6 +464,10 @@
           <img src="images/logo.svg" alt="ソシアル製薬">
           <span>商品情報サイト</span>
         </a>
+        <address class="footer__company">
+          ソシアル製薬株式会社<br>
+          京都府京都市左京区宗吾里貝町2-116
+        </address>
         <ul class="footer__policy">
           <li><a href="#">個人情報の取り扱いについて</a></li>
           <li><a href="#">セキュリティポリシー</a></li>

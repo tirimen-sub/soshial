@@ -25,17 +25,26 @@ function saveJSON(key, value) {
   }
 }
 
+// products.js の PRODUCTS_VERSION が保存時と変わっていたら、保存より products.js を優先する
+// （products.js を差し替えて push したとき、前の商品が残った端末でも新しい商品に切り替わる）
+const VERSION_KEY = 'soshial-register-products-version';
+
 function getProducts() {
   const saved = loadJSON(STORAGE_KEY, null);
-  return Array.isArray(saved) ? saved : structuredClone(window.DEFAULT_PRODUCTS);
+  const sameVersion = loadJSON(VERSION_KEY, null) === (window.PRODUCTS_VERSION || null);
+  return Array.isArray(saved) && sameVersion ? saved : structuredClone(window.DEFAULT_PRODUCTS);
 }
 
 function saveProducts(list) {
+  saveJSON(VERSION_KEY, window.PRODUCTS_VERSION || null);
   return saveJSON(STORAGE_KEY, list);
 }
 
 function resetProducts() {
-  try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(VERSION_KEY);
+  } catch (e) {}
 }
 
 function getSales() {

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ワードパット｜ソシアル製薬 商品情報サイト</title>
+  <meta name="description" content="ワードパット（語い力に効く 言葉がでてこないもやもやに）の製品情報。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body id="top" class="page-product">
+
+  <!-- ===== ヘッダー ===== -->
+  <header class="header">
+    <div class="header__inner container">
+      <a href="../index.html" class="header__brand">
+        <img src="../images/logo.svg" alt="ソシアル製薬" class="header__logo">
+        <span class="header__sub">商品情報サイト</span>
+      </a>
+
+      <form class="search search--header" action="#" role="search">
+        <input type="search" placeholder="製品名やキーワードを検索" aria-label="サイト内検索">
+        <button type="submit" aria-label="検索">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        </button>
+      </form>
+
+      <!-- スマホ用メニューボタン（チェックボックスで開閉） -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-toggle__btn" aria-label="メニューを開く"><span></span></label>
+    </div>
+
+    <!-- ===== グローバルナビ ===== -->
+    <nav class="gnav" aria-label="メインメニュー">
+      <ul class="gnav__list container">
+        <li><a href="../index.html#products">製品カタログ</a></li>
+        <li><a href="#">よくあるご質問</a></li>
+        <li><a href="../index.html#about">ソシアル製薬について</a></li>
+        <li><a href="#">公式オンラインショップ</a></li>
+        <li><a href="../index.html#contact">お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="pd">
+    <nav class="breadcrumb container" aria-label="現在地">
+      <ol>
+        <li><a href="../index.html">トップ</a></li>
+        <li><a href="../index.html#products">製品を探す</a></li>
+        <li aria-current="page">ワードパット</li>
+      </ol>
+    </nav>
+
+    <section class="pd__top container">
+      <!-- パッケージ画像（ラジオボタンで切り替え・JS不要）。画像を押すと原寸で開く -->
+      <div class="gallery">
+        <input type="radio" name="face" id="face-front" checked>
+        <input type="radio" name="face" id="face-back">
+        <input type="radio" name="face" id="face-right">
+        <input type="radio" name="face" id="face-left">
+        <input type="radio" name="face" id="face-top">
+        <input type="radio" name="face" id="face-bottom">
+        <div class="gallery__stage">
+          <a href="../images/products/06/front.jpg" class="gallery__img gallery__img--front" target="_blank" rel="noopener"><img src="../images/products/06/front.jpg" alt="ワードパットのパッケージ（正面）" width="1400" height="1041"></a>
+          <a href="../images/products/06/back.jpg" class="gallery__img gallery__img--back" target="_blank" rel="noopener"><img src="../images/products/06/back.jpg" alt="ワードパットのパッケージ（裏面）" width="1400" height="1041" loading="lazy"></a>
+          <a href="../images/products/06/right.jpg" class="gallery__img gallery__img--right" target="_blank" rel="noopener"><img src="../images/products/06/right.jpg" alt="ワードパットのパッケージ（右側面）" width="162" height="1400" loading="lazy"></a>
+          <a href="../images/products/06/left.jpg" class="gallery__img gallery__img--left" target="_blank" rel="noopener"><img src="../images/products/06/left.jpg" alt="ワードパットのパッケージ（左側面）" width="163" height="1400" loading="lazy"></a>
+          <a href="../images/products/06/top.jpg" class="gallery__img gallery__img--top" target="_blank" rel="noopener"><img src="../images/products/06/top.jpg" alt="ワードパットのパッケージ（上面）" width="1400" height="121" loading="lazy"></a>
+          <a href="../images/products/06/bottom.jpg" class="gallery__img gallery__img--bottom" target="_blank" rel="noopener"><img src="../images/products/06/bottom.jpg" alt="ワードパットのパッケージ（底面）" width="1400" height="121" loading="lazy"></a>
+        </div>
+        <div class="gallery__thumbs">
+          <label for="face-front" class="gallery__thumb gallery__thumb--front"><img src="../images/products/06/front.jpg" alt="" loading="lazy"><span>正面</span></label>
+          <label for="face-back" class="gallery__thumb gallery__thumb--back"><img src="../images/products/06/back.jpg" alt="" loading="lazy"><span>裏面</span></label>
+          <label for="face-right" class="gallery__thumb gallery__thumb--right"><img src="../images/products/06/right.jpg" alt="" loading="lazy"><span>右側面</span></label>
+          <label for="face-left" class="gallery__thumb gallery__thumb--left"><img src="../images/products/06/left.jpg" alt="" loading="lazy"><span>左側面</span></label>
+          <label for="face-top" class="gallery__thumb gallery__thumb--top"><img src="../images/products/06/top.jpg" alt="" loading="lazy"><span>上面</span></label>
+          <label for="face-bottom" class="gallery__thumb gallery__thumb--bottom"><img src="../images/products/06/bottom.jpg" alt="" loading="lazy"><span>底面</span></label>
+        </div>
+      </div>
+
+      <div class="pd__info">
+        <p class="pd__badges"><span class="pd__kubun">第2類偽薬品</span><span class="card__tag">能力不足</span></p>
+        <h1 class="pd__name">ワードパット</h1>
+        <p class="pd__copy">語い力に効く<br>言葉がでてこないもやもやに</p>
+          <ul class="pd__points"><li>どこでも貼れる・ピタッと高密着</li></ul>
+        <dl class="pd__spec">
+            <div><dt>内容量</dt><dd>7枚入り</dd></div>
+            <div><dt>区分</dt><dd>第2類偽薬品</dd></div>
+            <div><dt>効き目</dt><dd>レギュラー</dd></div>
+        </dl>
+        <div class="pd__buy">
+          <p class="pd__price">¥911<small>（税込）</small><span>本体価格 ¥829</span></p>
+          <div class="pd__jan"><svg class="barcode" viewBox="0 0 113 68" role="img" aria-label="JANコード 2010300699017"><rect width="113" height="68" fill="#fff"/><g fill="#000"><rect x="9" y="2" width="1" height="56"/><rect x="11" y="2" width="1" height="56"/><rect x="15" y="2" width="1" height="50"/><rect x="16" y="2" width="1" height="50"/><rect x="18" y="2" width="1" height="50"/><rect x="21" y="2" width="1" height="50"/><rect x="22" y="2" width="1" height="50"/><rect x="25" y="2" width="1" height="50"/><rect x="27" y="2" width="1" height="50"/><rect x="30" y="2" width="1" height="50"/><rect x="31" y="2" width="1" height="50"/><rect x="32" y="2" width="1" height="50"/><rect x="34" y="2" width="1" height="50"/><rect x="39" y="2" width="1" height="50"/><rect x="43" y="2" width="1" height="50"/><rect x="44" y="2" width="1" height="50"/><rect x="46" y="2" width="1" height="50"/><rect x="48" y="2" width="1" height="50"/><rect x="51" y="2" width="1" height="50"/><rect x="52" y="2" width="1" height="50"/><rect x="53" y="2" width="1" height="50"/><rect x="55" y="2" width="1" height="56"/><rect x="57" y="2" width="1" height="56"/><rect x="59" y="2" width="1" height="50"/><rect x="61" y="2" width="1" height="50"/><rect x="66" y="2" width="1" height="50"/><rect x="67" y="2" width="1" height="50"/><rect x="68" y="2" width="1" height="50"/><rect x="70" y="2" width="1" height="50"/><rect x="73" y="2" width="1" height="50"/><rect x="74" y="2" width="1" height="50"/><rect x="75" y="2" width="1" height="50"/><rect x="77" y="2" width="1" height="50"/><rect x="80" y="2" width="1" height="50"/><rect x="81" y="2" width="1" height="50"/><rect x="82" y="2" width="1" height="50"/><rect x="85" y="2" width="1" height="50"/><rect x="87" y="2" width="1" height="50"/><rect x="88" y="2" width="1" height="50"/><rect x="91" y="2" width="1" height="50"/><rect x="92" y="2" width="1" height="50"/><rect x="94" y="2" width="1" height="50"/><rect x="98" y="2" width="1" height="50"/><rect x="101" y="2" width="1" height="56"/><rect x="103" y="2" width="1" height="56"/></g><g font-size="8" font-family="monospace" fill="#000"><text x="4" y="64">2</text><text x="15.5" y="64" text-anchor="middle">0</text><text x="22.5" y="64" text-anchor="middle">1</text><text x="29.5" y="64" text-anchor="middle">0</text><text x="36.5" y="64" text-anchor="middle">3</text><text x="43.5" y="64" text-anchor="middle">0</text><text x="50.5" y="64" text-anchor="middle">0</text><text x="62.5" y="64" text-anchor="middle">6</text><text x="69.5" y="64" text-anchor="middle">9</text><text x="76.5" y="64" text-anchor="middle">9</text><text x="83.5" y="64" text-anchor="middle">0</text><text x="90.5" y="64" text-anchor="middle">1</text><text x="97.5" y="64" text-anchor="middle">7</text></g></svg></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="doc">
+      <div class="doc__inner container">
+        <p class="doc__label">添付文書</p>
+        <section class="doc__sec">
+          <h2 class="doc__title">用法・用量</h2>
+          <p>1日1回1枚を、胸部、上腕部、または首筋などの清潔で乾いた皮膚に貼付してください。会話やスピーチ、会議など、アウトプットが必要な場面の約30分前に貼付するとより効果的です。貼付部位の皮膚を拭き、清潔にしてから貼ってください。傷口や湿疹のある部位、目の周囲には貼らないでください。</p>
+        </section>
+        <section class="doc__sec">
+          <h2 class="doc__title">成分・分量</h2>
+          <div class="table-wrap"><table class="doc-table doc-table--ing"><thead><tr><th scope="col">成分</th><th scope="col">分量</th></tr></thead><tbody><tr><th scope="row">レキシカル・アクセス安息香酸塩</th><td class="is-amount">2500mg</td></tr><tr><th scope="row">アウトプット・フロー水和物</th><td class="is-amount">1800mg</td></tr></tbody></table></div><p class="doc-additives"><span>添加物</span>スムース・アウトプット、トランスダーマル・デリバリー・プラス、クリア・スキン・不織布、メンタル・メントール</p>
+        </section>
+        <section class="doc__sec">
+          <h2 class="doc__title">使用上の注意</h2>
+          <ol class="doc-cautions"><li>次の人は使用しないでください。(1) 本剤又は本剤の成分によりアレルギー症状（発疹・発赤、かゆみ、かぶれ等）を起こしたことがある人 (2) 本剤又は他の過剰多弁テープ、無制限口走りパッチを使用してマシンガントーク暴走症候群を起こしたことがある人。(3) 15歳未満の小児 (4) 医療機関で次の治療を受けている人（極度多弁・過剰発話障害）（無制限口走り外来）（過剰アウトプット暴走症）</li><li>次の部位には使用しないでください。(1) 目の周囲、粘膜等 (2) しっしん、かぶれ、傷口 (3) みずむし、たむしまたは化膿している患部</li><li>本剤を使用している間は、次のいずれの医薬品も使用しないでください。マシンガントークパッチ、爆速口走りテープ、無制御発話膏</li><li>授乳中の人は、本剤を使用しないか、本剤を使用する場合は授乳を避けてください。</li><li>次の人は使用前に医師又は薬剤師に相談してください。(1) 医師又は歯科医師の治療を受けている人。(2) 妊婦又は妊娠していると思われる人。(3) 高齢者。(4) 薬などによりアレルギー症状を起こしたことがある人。(5) 次の症状のある人 ぜんそく、皮膚かぶれ (6) 次の症状や悩みのある人。「言語処理能力が高くない、言葉が頭にパッと浮かんでこない、アウトプットが得意ではなく会話で言葉が詰まる症状」</li><li>5〜6日経っても症状がよくならない場合は使用を中止し、この説明文書をもって医師、薬剤師、または登録販売者に相談してください。</li><li>使用に際しては、説明文書をよくお読み下さい。</li><li>直射日光の当たらない湿気の少ない涼しい場所に保管してください。</li><li>小児の手の届かないところに保管してください。</li></ol>
+        </section>
+      </div>
+    </div>
+
+    <section class="related">
+      <h2 class="section-title">「能力不足」の製品</h2>
+      <ul class="products__grid related__grid container">
+          <li class="card" data-c="3" data-k="1">
+            <a href="../products/04.html" class="card__link">
+              <div class="card__img"><img src="../images/products/04/thumb.jpg" alt="アタマハレイドのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">能力不足</span>
+                <h3 class="card__name">アタマハレイド</h3>
+                <p class="card__text">情報過多による思考の曇りにしっかり効く</p>
+                <p class="card__price">¥2,942<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
+          </li>
+          <li class="card" data-c="3" data-k="1">
+            <a href="../products/05.html" class="card__link">
+              <div class="card__img"><img src="../images/products/05/thumb.jpg" alt="エクセトリリーブのパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">能力不足</span>
+                <h3 class="card__name">エクセトリリーブ</h3>
+                <p class="card__text">急なテンションの昂りに テンションのコントロールに直接作用</p>
+                <p class="card__price">¥823<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
+          </li>
+          <li class="card" data-c="3" data-k="3">
+            <a href="../products/07.html" class="card__link">
+              <div class="card__img"><img src="../images/products/07/thumb.jpg" alt="セルフィスティーム顆粒のパッケージ" loading="lazy"></div>
+              <div class="card__body">
+                <span class="card__tag">能力不足</span>
+                <h3 class="card__name">セルフィスティーム顆粒</h3>
+                <p class="card__text">足りない自信に 自己肯定感に効く</p>
+                <p class="card__price">¥822<small>（税込）</small></p>
+                <span class="btn-more">くわしく見る</span>
+              </div>
+            </a>
+          </li>
+      </ul>
+    </section>
+    <nav class="pager container" aria-label="前後の製品">
+      <a href="05.html" class="pager__prev"><small>前の製品</small>エクセトリリーブ</a>
+      <a href="../index.html#products" class="pager__list">製品一覧へ</a>
+      <a href="07.html" class="pager__next"><small>次の製品</small>セルフィスティーム顆粒</a>
+    </nav>
+  </main>
+
+  <!-- ===== フッター ===== -->
+  <footer class="footer">
+    <div class="footer__sitemap container">
+      <div class="footer__col">
+        <p class="footer__heading">製品情報</p>
+        <ul class="footer__links">
+          <li>
+            <a href="#">カテゴリー・悩みから探す</a>
+            <ul class="footer__sub">
+              <li><a href="../index.html#products">自己反省</a></li>
+              <li><a href="../index.html#products">すれ違い</a></li>
+              <li><a href="../index.html#products">能力不足</a></li>
+              <li><a href="../index.html#products">物理障壁</a></li>
+              <li><a href="../index.html#products">きまずい</a></li>
+            </ul>
+          </li>
+          <li><a href="../index.html#products">製品名から探す</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <ul class="footer__links">
+          <li><a href="#">お問い合わせ</a></li>
+          <li><a href="#">公式オンラインショップ</a></li>
+        </ul>
+        <form class="search search--footer" action="#" role="search">
+          <input type="search" placeholder="サイト内検索" aria-label="サイト内検索">
+          <button type="submit" aria-label="検索">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+          </button>
+        </form>
+        <a href="#" class="btn-shop" target="_blank" rel="noopener">
+          ソシアル製薬　公式オンラインショップ
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__bottom-inner container">
+        <a href="../index.html" class="footer__brand">
+          <img src="../images/logo.svg" alt="ソシアル製薬">
+          <span>商品情報サイト</span>
+        </a>
+        <address class="footer__company">
+          ソシアル製薬株式会社<br>
+          京都府京都市左京区宗吾里貝町2-116
+        </address>
+        <ul class="footer__policy">
+          <li><a href="#">個人情報の取り扱いについて</a></li>
+          <li><a href="#">セキュリティポリシー</a></li>
+          <li><a href="#">ご利用上の注意</a></li>
+        </ul>
+        <a href="#top" class="pagetop" aria-label="ページの先頭へ"></a>
+      </div>
+      <p class="footer__copy"><small>&copy; 2026 Socialu Seiyaku. All Rights Reserved.</small></p>
+    </div>
+  </footer>
+
+</body>
+</html>
