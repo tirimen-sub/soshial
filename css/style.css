@@ -380,20 +380,20 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
   flex-direction: column;
   transition: transform .2s, box-shadow .2s;
 }
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, .12);
-}
-
-.card__link { display: flex; flex-direction: column; flex: 1; }
 
 /* 製品画像（パッケージ正面）。縦長・横長どちらも枠に収める */
 .card__img {
   --pad: 14px;
   position: relative;
+  display: block;
+  width: 100%;
   aspect-ratio: 4 / 3;
+  padding: 0;
+  border: 0;
   background: var(--color-bg-gray);
+  cursor: zoom-in;
 }
+.card__img:focus-visible { outline: 3px solid var(--color-main); outline-offset: -3px; }
 .card__img img {
   position: absolute;
   inset: var(--pad);
@@ -403,7 +403,7 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .15));
   transition: transform .3s;
 }
-.card:hover .card__img img { transform: scale(1.04); }
+.card__img:hover img { transform: scale(1.05); }
 
 
 .card__body {
@@ -446,8 +446,7 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
 }
-.btn-more:hover,
-.card:hover .btn-more { background: var(--color-main); }
+.btn-more:hover { background: var(--color-main); }
 
 /* =========================================================
    お問い合わせ
@@ -670,6 +669,35 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 }
 
 /* =========================================================
+   スライダー（製品のスライド）
+   ========================================================= */
+.hero__text { display: flex; flex-direction: column; gap: 10px; }
+.hero__eyebrow { font-size: .9rem; font-weight: 700; color: var(--color-main-dark); letter-spacing: .05em; }
+.hero__name { font-size: 1.1rem; font-weight: 700; }
+.hero__img--product {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4%;
+}
+.hero__pkg {
+  justify-self: center;
+  max-height: 340px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .2));
+}
+
+@media (max-width: 640px) {
+  .hero__img { padding: 0 13%; }
+  .hero__img--product { grid-template-columns: 1.2fr 1fr; gap: 3%; }
+  .hero__pkg { max-height: 190px; }
+  .hero__copy { font-size: 1.05rem; }
+  .hero__eyebrow, .hero__name { font-size: .75rem; }
+  .hero__text { gap: 6px; }
+}
+
+/* =========================================================
    製品を探す：絞り込みボタン（ラジオボタン + :has で絞り込む・JS不要）
    ========================================================= */
 .chips input { position: absolute; opacity: 0; pointer-events: none; }
@@ -693,22 +721,7 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 .search-result { margin-bottom: 16px; font-size: .9rem; }
 
 /* =========================================================
-   準備中のページ（製品詳細）
-   ========================================================= */
-.coming { padding: 96px 0 120px; background: var(--color-bg-gray); text-align: center; }
-.coming__label {
-  display: inline-block;
-  padding: 2px 14px;
-  border: 1px solid var(--color-text-light);
-  color: var(--color-text-light);
-  font-size: .8rem;
-  letter-spacing: .2em;
-}
-.coming__title { margin: 16px 0 12px; font-size: 1.6rem; }
-.coming__back { max-width: 240px; margin: 32px auto 0; }
-
-/* =========================================================
-   開発中メモ（デザイン待ちの項目。公開前に消す）
+   デザインメモ（人がデザインする項目の一覧。公開前に消す）
    画面の左下に固定。丸ボタンで開閉（チェックボックス・状態は js/site.js が覚える）
    ========================================================= */
 .devmemo {
@@ -721,42 +734,87 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 }
 .devmemo__check { position: absolute; opacity: 0; pointer-events: none; }
 .devmemo__btn {
-  display: grid;
-  place-items: center;
-  width: 64px;
-  height: 64px;
+  display: block;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  background: repeating-linear-gradient(-45deg, #ffd400 0 8px, #222 8px 16px);
+  background:
+    linear-gradient(#fff, #fff) center 18px / 20px 2px no-repeat,
+    linear-gradient(#fff, #fff) center 25px / 20px 2px no-repeat,
+    linear-gradient(#fff, #fff) center 32px / 20px 2px no-repeat,
+    var(--color-text);
   box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
   cursor: pointer;
+  opacity: .85;
+  transition: opacity .2s;
 }
-.devmemo__btn span {
-  background: #ffd400;
-  color: #222;
-  font-size: .68rem;
-  font-weight: 700;
-  padding: 1px 5px;
-  border-radius: 3px;
-}
-.devmemo__check:focus-visible + .devmemo__btn { outline: 3px solid #222; outline-offset: 3px; }
+.devmemo__btn:hover { opacity: 1; }
+.devmemo__check:focus-visible + .devmemo__btn { outline: 3px solid var(--color-main); outline-offset: 3px; }
 .devmemo__panel {
   display: none;
   position: absolute;
   left: 0;
-  bottom: 76px;
+  bottom: 64px;
   width: min(340px, calc(100vw - 32px));
   max-height: 60vh;
   overflow-y: auto;
   padding: 14px 16px;
-  background: #fffbe0;
-  border: 2px solid #222;
-  border-top: 8px solid transparent;
-  border-image: repeating-linear-gradient(-45deg, #ffd400 0 8px, #222 8px 16px) 8 2 2 2 / 8px 2px 2px 2px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, .25);
-  color: #222;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .2);
+  color: var(--color-text);
 }
 .devmemo__check:checked ~ .devmemo__panel { display: block; }
 .devmemo__title { font-weight: 700; margin-bottom: 6px; }
 .devmemo__list { list-style: disc; padding-left: 1.3em; margin: 0; }
 .devmemo__list li + li { margin-top: 3px; }
-.devmemo__note { margin-top: 10px; font-size: .7rem; color: #666; }
+
+/* =========================================================
+   画像の拡大表示（カードの画像を押すと開く。<dialog> を js/site.js で開閉）
+   ========================================================= */
+.zoom {
+  width: min(92vw, 900px);
+  max-height: 92vh;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+.zoom::backdrop { background: rgba(0, 0, 0, .75); }
+.zoom[open] { animation: zoom-in .25s ease-out; }
+@keyframes zoom-in { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: none; } }
+.zoom__figure { margin: 0; display: grid; justify-items: center; gap: 12px; }
+.zoom__img {
+  max-width: 100%;
+  max-height: calc(92vh - 60px);
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 30px rgba(0, 0, 0, .4));
+}
+.zoom__caption { color: #fff; font-weight: 700; letter-spacing: .05em; }
+.zoom__close {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+}
+.zoom__close::before,
+.zoom__close::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 18px;
+  height: 2px;
+  background: var(--color-text);
+  transform: rotate(45deg);
+}
+.zoom__close::after { transform: rotate(-45deg); }

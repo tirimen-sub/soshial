@@ -1,5 +1,5 @@
 // =========================================================
-// 全ページ共通：キーワード検索と、開発中メモの開閉の記憶
+// 全ページ共通：キーワード検索、画像の拡大表示、デザインメモの開閉の記憶
 // =========================================================
 (function () {
   // ---------- キーワード検索 ----------
@@ -75,7 +75,28 @@
     if (q) search(q);
   }
 
-  // ---------- 開発中メモ：開閉の状態を覚える ----------
+  // ---------- 画像の拡大表示（data-zoom を持つボタンを押すと <dialog> で開く） ----------
+  var zoom = document.getElementById('zoom');
+  if (zoom && typeof zoom.showModal === 'function') {
+    var zoomImg = zoom.querySelector('.zoom__img');
+    var zoomCap = zoom.querySelector('.zoom__caption');
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-zoom]');
+      if (!btn) return;
+      var caption = btn.getAttribute('data-caption') || '';
+      zoomImg.src = btn.getAttribute('data-zoom');
+      zoomImg.alt = caption ? caption + 'のパッケージ' : '';
+      zoomCap.textContent = caption;
+      zoom.showModal();
+    });
+    // 閉じるボタン・画像の外（背景）を押したら閉じる。Esc は dialog が閉じてくれる
+    zoom.addEventListener('click', function (e) {
+      if (e.target === zoom || e.target.closest('.zoom__close') || e.target.classList.contains('zoom__figure')) zoom.close();
+    });
+    zoom.addEventListener('close', function () { zoomImg.removeAttribute('src'); });
+  }
+
+  // ---------- デザインメモ：開閉の状態を覚える ----------
   var memo = document.getElementById('devmemo-open');
   if (memo) {
     var KEY = 'soshial-devmemo-open';
